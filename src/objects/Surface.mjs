@@ -1,9 +1,10 @@
-import Neko2D from "../Neko2D.mjs"
+import Neko2D from "../../Neko2D.mjs"
 
 ((module) => {
     var module = module || {};
-    module.PI = Math.PI;
-    module.EULER = Math.E;
+    module.Surface = class {
+        
+    }
     return module;
 })(Neko2D || {});
 

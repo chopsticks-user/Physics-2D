@@ -3,32 +3,5 @@ import Neko2D from "./Neko2D.module.js"
 
 console.log(Neko2D);
 
-// console.log(performance.now());
-// console.log(s.time.memo[0]);
-// console.log(s.time.current());
-// console.log(s.time.current());
-// console.log(s.time.memo);
-
-const t = new Neko2D.Time();
-
-console.log(t);
-console.log(t.current());
-console.log(t);
-
-const s = new Neko2D.Space();
-console.log(s.time.current());
-console.log(s.time);
-
-Neko2D.displayTimeEslapsed("aaa", 0);
-console.log('a');
-
-const pr = (a, b, c, d, e) => console.log(`${a+b}aaaaaaaaa`);
-// const cpr = () => pr(5, 6)
-const cpr = Neko2D.curryFunction(pr, 55, 6222);
-console.log(cpr);
-
-Neko2D.funcExeTime("func", cpr);
-console.log(Neko2D);
-
-console.log(Neko2D.formatDPs(0.2767272, 3));
-console.log(Neko2D.toRadians(90), Neko2D.toDegrees(3.14));
+const v = Neko2D.V2.fromProperties(1, Neko2D.PI / 4);
+console.log(v);
