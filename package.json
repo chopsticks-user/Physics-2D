@@ -5,7 +5,8 @@
     "main": "src/Neko2D.module.js",
     "type": "module",
     "scripts": {
-        "start": "node Neko2D.module.js"
+        "start": "node Neko2D.module.js",
+        "test": "node test.mjs"
     },
     "dependencies": {
 
