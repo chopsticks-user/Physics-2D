@@ -24,17 +24,7 @@ import Neko2D from "../Neko2D.mjs"
             this.lastTransform = {x: 0, y: 0};
             this.scale = 1;
             this.objects = [];
-            this.time = {
-                memo: [performance.now()],
-                start: performance.now(),
-                last: this.time.memo[0],
-                current: () => {
-                    const currentTime = performance.now();
-                    this.time.memo.push(currentTime);
-                    this.time.last = this.time.memo[0];
-                    return this.time.memo[1];
-                }
-            }
+            this.time = new Neko2D.Time();
         };
     }
     return module;
