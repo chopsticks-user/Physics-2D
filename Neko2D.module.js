@@ -7,6 +7,7 @@ import "./src/objects/Pin.mjs"
 import "./src/forces/Force.mjs"
 import "./ultis/Convert.mjs"
 import "./ultis/Format.mjs"
+import "./ultis/Debug.mjs"
 import Neko2D from "./Neko2D.mjs"
 
 export default Neko2D;
