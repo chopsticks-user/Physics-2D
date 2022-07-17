@@ -28,3 +28,7 @@ const cpr = Neko2D.curryFunction(pr, 55, 6222);
 console.log(cpr);
 
 Neko2D.funcExeTime("func", cpr);
+console.log(Neko2D);
+
+console.log(Neko2D.formatDPs(0.2767272, 3));
+console.log(Neko2D.toRadians(90), Neko2D.toDegrees(3.14));

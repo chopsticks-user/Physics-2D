@@ -20,7 +20,7 @@ import Neko2D from "../Neko2D.mjs"
         console.log(`\nStop executing at t = ${tEnd} ms.`);
         console.log(`Time elapsed: ${tEnd - tStart} ms.`);
         console.log(`Debug message: ${message}`);
-        console.log("-----------------------------End---------------------------------\n");
+        console.log("----------------------------Finished-----------------------------\n");
     }
     return module;
 })(Neko2D || {});

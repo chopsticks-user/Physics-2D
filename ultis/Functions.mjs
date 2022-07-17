@@ -5,6 +5,9 @@ import Neko2D from "../Neko2D.mjs"
     module.curryFunction = (targetFunction, ...args) => {
         return () => targetFunction(...args);
     };
+    module.groupCurriedFunctions = (...curriedFunctions) => {
+        return;
+    }
     return module;
 })(Neko2D || {});
 
