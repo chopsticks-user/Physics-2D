@@ -37,6 +37,12 @@ import Neko2D from "../../Neko2D.mjs"
 
         static fromPoints = (initialP, terminalP) => {
             try {
+                if (!initialP || !terminalP) {
+                    throw new ReferenceError("From <Neko2D.V2.fromPoints>, the initial point is undefined.");
+                }
+                if (!terminalP) {
+                    throw new ReferenceError("From <Neko2D.V2.fromPoints>, the terminal point is undefined.");
+                }
                 if (typeof initialP.x !== "number" || 
                     typeof initialP.y !== "number" ||
                     typeof terminalP.x !== "number" ||
@@ -54,6 +60,12 @@ import Neko2D from "../../Neko2D.mjs"
 
         static fromProperties = (magnitude, direction) => {
             try {
+                if (!magnitude) {
+                    throw new ReferenceError("From <Neko2D.V2.fromProperties>, magnitude is undefined.");
+                }
+                if (!direction) {
+                    throw new ReferenceError("From <Neko2D.V2.fromProperties>, direction is undefined.");
+                }
                 if (typeof magnitude !== "number" || typeof direction !== "number") {
                     throw new TypeError("From <Neko2D.V2.fromProperties>, both magnitude and direction must be numbers.");
                 }
@@ -69,6 +81,9 @@ import Neko2D from "../../Neko2D.mjs"
             try {
                 let [x, y] = [0, 0];
                 vectors.forEach((vector) => {
+                    if (!vector) {
+                        throw new ReferenceError("From <Neko2D.V2.sum>, at least one vector is undefined.");
+                    }
                     if (typeof vector.x !== "number" || typeof vector.y !== "number") {
                         throw new TypeError(
                             "From <Neko2D.V2.sum>, each vector must have type of either {x: number, y: number} or a Neko2D.V2 object."
@@ -86,6 +101,9 @@ import Neko2D from "../../Neko2D.mjs"
         static scalarProduct = (scalar, ...vectors) => {
             try {
                 const len = vectors.length;
+                if (!scalar) {
+                    throw new ReferenceError("From <Neko2D.V2.scalarProduct>, undefined scalar.");
+                }
                 if (typeof scalar !== 'number') {
                     throw new TypeError("From <Neko2D.V2.scalarProduct>, scalar must be a number.");
                 }
@@ -97,6 +115,9 @@ import Neko2D from "../../Neko2D.mjs"
                 }
                 const results = [];
                 vectors.forEach((vector) => {
+                    if (!vector) {
+                        throw new ReferenceError("From <Neko2D.V2.scalarProduct>, at least one vector is undefined.");
+                    }
                     if (typeof vector.x !== "number" || typeof vector.y !== "number") {
                         throw new TypeError(
                             "From <Neko2D.V2.scalarProduct>, each vector must have type of either {x: number, y: number} or a Neko2D.V2 object."
@@ -113,6 +134,9 @@ import Neko2D from "../../Neko2D.mjs"
         static dotProduct = (rVector, ...lVectors) => {
             try {
                 const len = lVectors.length;
+                if (!rVector) {
+                    throw new ReferenceError("From <Neko2D.V2.dotProduct>, the first vector is undefined.");
+                }
                 if (len === 0) {
                     throw new Error("<Neko2D.V2.dotProduct> requires at least two arguments.");
                 }
@@ -144,6 +168,9 @@ import Neko2D from "../../Neko2D.mjs"
                     throw new Error("From <Neko2D.V2.crossProduct>, cross product among more than three vectors is currently not available.");
                 }
                 vectors.forEach((vector) => {
+                    if (!vector) {
+                        throw new ReferenceError("From <Neko2D.V2.crossProduct>, at least one vector is undefined.");
+                    }
                     if (typeof vector.x !== "number" || typeof vector.y !== "number") {
                         throw new TypeError(
                             "From <Neko2D.V2.crossProduct>, each vector must have type of either {x: number, y: number} or a Neko2D.V2 object."
