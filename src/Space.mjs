@@ -1,9 +1,6 @@
 import Neko2D from "../Neko2D.mjs"
 // import { performance } from "perf-hooks"
 
-const MAX_WIDTH = 3141622;
-const MAX_HEIGHT = 3141622;
-
 ((module) => {
     var module = module || {};
     module.Space = class {
@@ -26,11 +23,11 @@ const MAX_HEIGHT = 3141622;
             };
             this.lastTransform = { x: 0, y: 0 };
             this.scale = 1;
-            this.objects = [];
-            this.time = new Neko2D.Time();
         };
-        static get MAX_WIDTH() { return MAX_WIDTH };
-        static get MAX_HEIGHT() { return MAX_HEIGHT };
+        objects = [];
+        time = new Neko2D.Time();
+        static MAX_WIDTH = 1048576;
+        static MAX_HEIGHT = 1048576;
     }
     Object.freeze(module.Space);
     return module;
