@@ -50,9 +50,10 @@ import Neko2D from "../../Neko2D.mjs"
         }
 
         normal = () => {
-            return new module.V2(- this.x, this.y);
+            return new module.V2(this.x, this.y);
         }
     }
+    Object.freeze(module.V2);
     return module;
 })(Neko2D || {});
 

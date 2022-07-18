@@ -10,6 +10,8 @@ import Neko2D from "../../Neko2D.mjs"
     module.arctan = Math.atan;
     module.sqrt = Math.sqrt;
     module.sign = Math.sign;
+    module.min = Math.min;
+    module.max = Math.max;
     return module;
 })(Neko2D || {});
 

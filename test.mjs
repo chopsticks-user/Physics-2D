@@ -1,10 +1,12 @@
 import Neko2D from "./Neko2D.module.js"
 // import { performance } from "perf-hooks"
 
+// Neko2D.toRadians = 0;
 console.log(Neko2D);
+// Neko2D.PI = 0;
+console.log(Neko2D.PI);
 
-const v = Neko2D.V2.fromProperties(1, Neko2D.PI / 4);
-const u = new Neko2D.V2(1, -1);
-console.log(Neko2D.V2.sum(u, v, v));
-console.log(Neko2D.V2.dotProduct(u, v));
-console.log(Neko2D.V2.crossProduct(v, u));
+const v = new Neko2D.V2(-2, -2).unit();
+console.log(v.x, v.y);
+console.log(Neko2D.Space.MAX_WIDTH, Neko2D.Space.MAX_HEIGHT);
+console.log(Neko2D.Time);

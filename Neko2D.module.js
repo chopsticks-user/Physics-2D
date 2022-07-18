@@ -6,9 +6,9 @@ import "./src/objects/Spring.mjs"
 import "./src/objects/Pin.mjs"
 import "./src/objects/Surface.mjs"
 import "./src/forces/Force.mjs"
-import "./src/math/Point2.mjs"
 import "./src/math/Vector2.mjs"
 import "./src/math/Functions.mjs"
+import "./src/Collision.mjs"
 import "./ultis/Convert.mjs"
 import "./ultis/Format.mjs"
 import "./ultis/Debug.mjs"
@@ -16,4 +16,5 @@ import "./ultis/Functions.mjs"
 import "./src/Constant.mjs"
 import Neko2D from "./Neko2D.mjs"
 
+Object.freeze(Neko2D);
 export default Neko2D;

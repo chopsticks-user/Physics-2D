@@ -1,5 +1,4 @@
 import Neko2D from "../Neko2D.mjs"
-// import { performance } from "perf-hooks"
 
 ((module) => {
     var module = module || {};
@@ -17,6 +16,7 @@ import Neko2D from "../Neko2D.mjs"
             return currentTime;
         }
     }
+    Object.freeze(module.Time);
     return module;
 })(Neko2D || {});
 

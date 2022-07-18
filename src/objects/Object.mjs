@@ -16,8 +16,8 @@ import Neko2D from "../../Neko2D.mjs"
             this.mass = mass;
         };
         
-
     }
+    Object.freeze(module.Object);
     return module;
 })(Neko2D || {});
 
