@@ -9,12 +9,7 @@ import "./src/objects/Surface.mjs"
 import "./src/forces/Force.mjs"
 import "./src/math/Vector2.mjs"
 import "./src/math/Functions.mjs"
-import "./src/collisions/Collision.mjs"
 import "./src/Constant.mjs"
-import "./ultis/Convert.mjs"
-import "./ultis/Format.mjs"
-import "./ultis/Debug.mjs"
-import "./ultis/Functions.mjs"
 import Neko2D from "./Neko2D.mjs"
 
 Object.freeze(Neko2D);

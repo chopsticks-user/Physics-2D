@@ -1,5 +1,5 @@
 import Neko2D from "../../Neko2D.mjs"
-import { strictlyNumber, looselyV2 } from "../../ultis/TypeChecks.mjs"
+import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
 
 ((module) => {
     var module = module || {};
