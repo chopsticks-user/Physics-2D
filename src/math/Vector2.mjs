@@ -1,10 +1,10 @@
 import Neko2D from "../../Neko2D.mjs"
-import { strictlyNumber, validV2 } from "../../ultis/TypeChecks.mjs"
+import { strictlyNumber, looselyV2, devideByZero } from "../../ultis/TypeChecks.mjs"
 
 ((module) => {
     var module = module || {};
     module.V2 = class {
-        constructor(x = 0, y = 0) {
+        constructor(x = 1, y = 1) {
             try {
                 if (!strictlyNumber(x, y)) {
                     throw new TypeError("From <Neko2D.V2.constructor>, both x and y must be numbers.");
@@ -19,15 +19,19 @@ import { strictlyNumber, validV2 } from "../../ultis/TypeChecks.mjs"
         get magnitude() { return module.sqrt(this.x ** 2 + this.y ** 2) }
 
         get direction() {
-            if (this.x === 0) {
-                return module.sign(this.y) * module.PI / 2;
-            }
             return module.arctan(this.y / this.x);
         }
 
         get unit() {
-            const mag = this.magnitude;
-            return new module.V2(this.x / mag, this.y / mag);
+            try {
+                const mag = this.magnitude;
+                if (mag === 0) {
+                    throw new Error("From <Neko2D.V2.unit>, devide by zero");
+                }
+                return new module.V2(this.x / mag, this.y / mag);
+            } catch (e) {
+                console.error(`${e.stack}\n`);
+            }
         }
 
         get normal() {
@@ -38,7 +42,7 @@ import { strictlyNumber, validV2 } from "../../ultis/TypeChecks.mjs"
 
         static fromPoints = (initialP, terminalP) => {
             try {
-                if (!validV2(initialP, terminalP)) {
+                if (!looselyV2(initialP, terminalP)) {
                     throw new TypeError(
                         "From <Neko2D.V2.fromPoints>, each point must have type of either {x: number, y: number} or a valid Neko2D.V2 object."
                     );
@@ -66,7 +70,7 @@ import { strictlyNumber, validV2 } from "../../ultis/TypeChecks.mjs"
             try {
                 let [x, y] = [0, 0];
                 vectors.forEach((vector) => {
-                    if (!validV2(vector)) {
+                    if (!looselyV2(vector)) {
                         throw new TypeError(
                             "From <Neko2D.V2.sum>, each vector must have type of either {x: number, y: number} or a Neko2D.V2 object."
                         );
@@ -94,7 +98,7 @@ import { strictlyNumber, validV2 } from "../../ultis/TypeChecks.mjs"
                 }
                 const results = [];
                 vectors.forEach((vector) => {
-                    if (!validV2(vector)) {
+                    if (!looselyV2(vector)) {
                         throw new TypeError(
                             "From <Neko2D.V2.scalarProduct>, each vector must have type of either {x: number, y: number} or a valid Neko2D.V2 object."
                         );
@@ -118,7 +122,7 @@ import { strictlyNumber, validV2 } from "../../ultis/TypeChecks.mjs"
                 }
                 const results = [];
                 lVectors.forEach((lVector) => {
-                    if (!validV2(lVector)) {
+                    if (!looselyV2(lVector)) {
                         throw new TypeError(
                             "From <Neko2D.V2.dotProduct>, each vector must have type of either {x: number, y: number} or a valid Neko2D.V2 object."
                         );
@@ -140,7 +144,7 @@ import { strictlyNumber, validV2 } from "../../ultis/TypeChecks.mjs"
                 if (len > 3) {
                     throw new Error("From <Neko2D.V2.crossProduct>, cross product among more than three vectors is currently not available.");
                 }
-                if (!validV2(...vectors)) {
+                if (!looselyV2(...vectors)) {
                     throw new TypeError(
                         "From <Neko2D.V2.crossProduct>, each vector must have type of either {x: number, y: number} or a Neko2D.V2 object."
                     );

@@ -1,4 +1,17 @@
+export const devideByZero = (denomimator) => {
+    return denomimator === 0;
+}
+
 export const strictlyNumber = (...args) => {
+    for (const arg of args) {
+        if (typeof arg !== "number" || arg !== arg || Math.abs(arg) === Infinity) {
+            return false;
+        }
+    }
+    return args.length ? true: false;
+}
+
+export const looselyNumber = (...args) => {
     for (const arg of args) {
         if (typeof arg !== "number" || arg !== arg) {
             return false;
@@ -7,7 +20,7 @@ export const strictlyNumber = (...args) => {
     return args.length ? true: false;
 }
 
-export const validV2 = (...vectors) => {
+export const looselyV2 = (...vectors) => {
     for (const vector of vectors) {
         if (!vector) {
             return false;

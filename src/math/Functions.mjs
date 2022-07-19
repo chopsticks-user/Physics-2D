@@ -12,6 +12,7 @@ import Neko2D from "../../Neko2D.mjs"
     module.sign = Math.sign;
     module.min = Math.min;
     module.max = Math.max;
+    module.abs = Math.abs;
     return module;
 })(Neko2D || {});
 

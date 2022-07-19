@@ -3,14 +3,15 @@ import { strictlyNumber } from "./ultis/TypeChecks.mjs";
 
 
 const f = () => {
-    const v = new Neko2D.V2(NaN);
     const u = new Neko2D.V2(3, -0.1);
-    const t = new Neko2D.V2(2, -0.1);
-    const a = Neko2D.V2.fromProperties(-3, 1.57);
+    const t = new Neko2D.V2(0, 0).unit;
+    const a = Neko2D.V2.fromProperties(-3, 3);
     console.log(Neko2D.V2.crossProduct(u, t, a));
 }
 
 Neko2D.funcExeTime("type checking", f);
+
+console.log(Neko2D.sqrt(-Infinity));
 
 // const t = new Neko2D.V2(0, 1);
 
