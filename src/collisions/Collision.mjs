@@ -1,4 +1,4 @@
-import Neko2D from "../Neko2D.mjs"
+import Neko2D from "../../Neko2D.mjs"
 
 // const projectOnto = ()
 

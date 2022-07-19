@@ -1,5 +1,5 @@
 import Neko2D from "../../Neko2D.mjs"
-import { strictlyNumber, looselyV2, devideByZero } from "../../ultis/TypeChecks.mjs"
+import { strictlyNumber, looselyV2 } from "../../ultis/TypeChecks.mjs"
 
 ((module) => {
     var module = module || {};
@@ -13,10 +13,14 @@ import { strictlyNumber, looselyV2, devideByZero } from "../../ultis/TypeChecks.
                 this.y = y;
             } catch (e) {
                 console.error(`${e.stack}\n`);
+                this.x = 1;
+                this.y = 1;
             }
         }
 
-        get magnitude() { return module.sqrt(this.x ** 2 + this.y ** 2) }
+        get magnitude() { 
+            return module.sqrt(this.x ** 2 + this.y ** 2);
+        }
 
         get direction() {
             return module.arctan(this.y / this.x);
@@ -38,7 +42,9 @@ import { strictlyNumber, looselyV2, devideByZero } from "../../ultis/TypeChecks.
             return new module.V2(this.x, this.y);
         }
 
-        get opposite() { return new module.V2(-this.x, -this.y) }
+        get opposite() { 
+            return new module.V2(-this.x, -this.y);
+        }
 
         static fromPoints = (initialP, terminalP) => {
             try {

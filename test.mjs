@@ -1,17 +1,12 @@
 import Neko2D from "./Neko2D.module.js"
-import { strictlyNumber } from "./ultis/TypeChecks.mjs";
+import { strictlyNumber } from "./ultis/TypeChecks.mjs"
+import { QuadTree } from "./src/data-structures/QuadTree.mjs"
+
+const a = new QuadTree(100, 100);
+a.children.NE = 0;
+console.log(a);
 
 
-const f = () => {
-    const u = new Neko2D.V2(3, -0.1);
-    const t = new Neko2D.V2(0, 0).unit;
-    const a = Neko2D.V2.fromProperties(-3, 3);
-    console.log(Neko2D.V2.crossProduct(u, t, a));
-}
-
-Neko2D.funcExeTime("type checking", f);
-
-console.log(Neko2D.sqrt(-Infinity));
 
 // const t = new Neko2D.V2(0, 1);
 

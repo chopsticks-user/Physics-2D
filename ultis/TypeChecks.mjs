@@ -1,7 +1,3 @@
-export const devideByZero = (denomimator) => {
-    return denomimator === 0;
-}
-
 export const strictlyNumber = (...args) => {
     for (const arg of args) {
         if (typeof arg !== "number" || arg !== arg || Math.abs(arg) === Infinity) {

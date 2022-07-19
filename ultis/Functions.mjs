@@ -1,14 +1,15 @@
-import Neko2D from "../Neko2D.mjs"
+export const curryFunction = (targetFunction, ...args) => {
+    return () => targetFunction(...args);
+};
 
-((module) => {
-    var module = module || {};
-    module.curryFunction = (targetFunction, ...args) => {
-        return () => targetFunction(...args);
-    };
-    module.groupCurriedFunctions = (...curriedFunctions) => {
-        return;
-    }
-    return module;
-})(Neko2D || {});
+export const groupCurriedFunctions = (...curriedFunctions) => {
+    return;
+}
 
-export default Neko2D;
+export const defConst = (scope, propName, propValue) => {
+    Object.defineProperty(scope, propName, {
+        value: propValue,
+        writable: false,
+        enumerable: true
+    });
+}
