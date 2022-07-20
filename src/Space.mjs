@@ -43,9 +43,9 @@ import {
                 this.objects = [];
                 this.time = new Neko2D.Time();
             }
+            Object.freeze(this);
         };
     }
-    Object.freeze(module.Space);
     return module;
 })(Neko2D || {});
 

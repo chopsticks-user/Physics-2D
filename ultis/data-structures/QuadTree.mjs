@@ -1,37 +1,70 @@
-import { strictlyNumber } from "../../Ultis/TypeChecks.mjs"
-
-const CAPACITY = 4;
+import { strictlyNumber, QUADTREE_CAPACITY } from "../../Ultis/Ultis.module.js"
 
 export class QuadTree {
-    constructor(width = 0, height = 0, center = {x: 0, y: 0}) {
+    #container;
+    #boundary;
+    #children;
+
+    constructor(width = 0, height = 0, center = { x: 0, y: 0 }) {
         try {
             if (!strictlyNumber(width, height, center.x, center.y)) {
-                throw new TypeError("From <Ultis.QuadTree.constructor>, width and height must be numbers.");
+                throw new TypeError("From <Ultis.QuadTree.constructor>, parameters must be numbers.");
             }
         } catch (e) {
             console.error(`${e.stack}\n`);
-            width = height = center.x = center.y = 0;
+            width = height = 0;
+            center = { x: 0, y: 0 };
         } finally {
-            this.parameters = {
-                width: width,
-                height: height,
-                center: center,
+            this.#container = [];
+            this.#boundary = {
+                topLeft: { x: center.x - width / 2, y: center.y + height / 2 },
+                bottomRight: { x: center.x + width / 2, y: center.y - height / 2 }
             }
-            this.boundary = {
-                topLeft: {x: center.x - width / 2, y: center.y + height / 2},
-                bottomRight: {x: center.x + width / 2, y: center.y - height / 2}
-            }
-            this.children = {
+            this.#children = {
                 NW: null,
                 NE: null,
                 SW: null,
                 SE: null
             };
         }
+        Object.freeze(this);
     }
 
-    static get CAPACITY() {
-        return 4;
+    #subdivide = () => {
+        const subWidth = (this.#boundary.bottomRight.x - this.#boundary.topLeft.x) / 2;
+        const subHeight = (this.#boundary.topLeft.y - this.#boundary.bottomRight.y) / 2;
+        const childCenters = {
+            NW: {
+                x: this.#boundary.topLeft.x + 0.5 * subWidth,
+                y: this.#boundary.bottomRight.y + 1.5 * subHeight  
+            },
+            NE: {
+                x: this.#boundary.topLeft.x + 1.5 * subWidth,
+                y: this.#boundary.bottomRight.y + 1.5 * subHeight
+            },
+            SW: {
+                x: this.#boundary.topLeft.x + 0.5 * subWidth,
+                y: this.#boundary.bottomRight.y + 0.5 * subHeight
+            },
+            SE: {
+                x: this.#boundary.topLeft.x + 1.5 * subWidth,
+                y: this.#boundary.bottomRight.y + 0.5 * subHeight
+            }
+        }
+
+        this.#children.NW = new QuadTree(subWidth, subHeight, childCenters.NW);
+        this.#children.NE = new QuadTree(subWidth, subHeight, childCenters.NE);
+        this.#children.SW = new QuadTree(subWidth, subHeight, childCenters.SW);
+        this.#children.SE = new QuadTree(subWidth, subHeight, childCenters.SE);
+
+        this.#container.forEach((value) => {
+            this.#children.NW.insert(value.x, value.y, value.maxReach);
+            this.#children.NE.insert(value.x, value.y, value.maxReach);
+            this.#children.SW.insert(value.x, value.y, value.maxReach);
+            this.#children.SE.insert(value.x, value.y, value.maxReach);
+        });
+
+        this.#container = [];
     }
 
     contain = (x, y, maxReach) => {
@@ -39,17 +72,16 @@ export class QuadTree {
             if (!strictlyNumber(x, y, maxReach)) {
                 throw new TypeError("From Ultis.QuadTree.contain, parameters muse be numbers.");
             }
-            console.log(QuadTree.CAPACITY);
-            if (y - maxReach > this.boundary.topLeft.y) {
+            if (y - maxReach > this.#boundary.topLeft.y) {
                 return false;
             }
-            if (y + maxReach < this.boundary.bottomRight.y) {
+            if (y + maxReach < this.#boundary.bottomRight.y) {
                 return false;
             }
-            if (x - maxReach > this.boundary.bottomRight.x) {
+            if (x - maxReach > this.#boundary.bottomRight.x) {
                 return false;
             }
-            if (x + maxReach < this.boundary.topLeft.x) {
+            if (x + maxReach < this.#boundary.topLeft.x) {
                 return false;
             }
             return true;
@@ -64,11 +96,27 @@ export class QuadTree {
             if (!strictlyNumber(x, y, maxReach)) {
                 throw new TypeError("From <QuadTree.insert>, parameters must be numbers.");
             }
-            if (!(this.contain(x, y, maxReach))) {
+            if (this.contain(x, y, maxReach) === false) {
                 return;
             }
+            if (this.#children.NW === null) {
+                if (this.#container.length < QUADTREE_CAPACITY) {
+                    this.#container.push({ x: x, y: y, maxReach: maxReach });
+                    return;
+                }
+                this.#subdivide();
+            }
+            this.#children.NW.insert(x, y, maxReach);
+            this.#children.NE.insert(x, y, maxReach);
+            this.#children.SW.insert(x, y, maxReach);
+            this.#children.SE.insert(x, y, maxReach);
+
         } catch (e) {
             console.error(`${e.stack}\n`);
         }
+    }
+
+    update = () => {
+        return;
     }
 }
