@@ -24,6 +24,34 @@ import {
             this.mass = mass;
         };
 
+        get maxReach() {
+            switch (this.shape) {
+                case CIRCLE: {
+
+                }
+                case TRIANGLE: {
+
+                }
+                case RECTANGLE: {
+                    
+                }
+            }
+        }
+
+        get shapeProperties() {
+            switch (this.shape) {
+                case CIRCLE: {
+
+                }
+                case TRIANGLE: {
+
+                }
+                case RECTANGLE: {
+
+                }
+            }
+        }
+
         get boundary() {
             switch (this.shape) {
                 case CIRCLE: {
@@ -48,7 +76,7 @@ import {
         }
 
         move = (dt = 0, dax = 0, day = 0) => {
-            
+
         }
     }
     return module;

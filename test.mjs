@@ -3,10 +3,8 @@ import { QuadTree } from "./ultis/data-structures/QuadTree.mjs"
 import * as U from "./ultis/Ultis.module.js"
 
 const test = () => {
-    const v = new Neko2D.V2(2, -2);
-    const n = new Neko2D.V2(1, 1);
-    v.coord = {x:1, y:1};
-    console.log(v.coord);
+    const r = new U.Rectangle(0, 0, 100, 300);
+    console.log(r.maxReach);
 }
 
 U.funcExeTime("Test QuadTree + Space", test);

@@ -15,7 +15,7 @@ export const SAT = (object1, object2) => {
             const dot = module.V2.dotProduct(vertex, projAxis);
             min = module.min(min, dot);
             max = module.max(max, dot);
-
+            
         });
     });
 }
