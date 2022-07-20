@@ -25,3 +25,9 @@ export {
     looselyNumber,
     looselyV2
 } from "./TypeChecks.mjs"
+
+export {
+    QUADTREE_CAPACITY,
+    SPACE_VIEW_MAX_WIDTH,
+    SPACE_VIEW_MAX_HEIGHT
+} from "./Constants.mjs"

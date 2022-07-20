@@ -1,10 +1,13 @@
 import Neko2D from "../Neko2D.mjs"
-import { strictlyNumber, looselyV2 } from "../ultis/Ultis.module.js"
+import { 
+    strictlyNumber, 
+    looselyV2,
+    SPACE_VIEW_MAX_WIDTH,
+    SPACE_VIEW_MAX_HEIGHT
+} from "../ultis/Ultis.module.js"
 
 ((module) => {
     var module = module || {};
-    const MAX_WIDTH = 1048576;
-    const MAX_HEIGHT = 1048576;
     module.Space = class {
         constructor(width = 0, height = 0, center = {x: 0, y: 0}) {
             try {
@@ -16,8 +19,8 @@ import { strictlyNumber, looselyV2 } from "../ultis/Ultis.module.js"
                 width = height = center.x = center.y = 0;
             } finally {
                 this.dimension = {
-                    width: Neko2D.min(width, MAX_WIDTH),
-                    height: Neko2D.min(height, MAX_HEIGHT)
+                    width: Neko2D.min(width, SPACE_VIEW_MAX_WIDTH),
+                    height: Neko2D.min(height, SPACE_VIEW_MAX_HEIGHT)
                 }
                 this.view = {
                     x: center.x, y: center.y,
