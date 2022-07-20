@@ -1,20 +1,27 @@
-import Neko2D from "../../Neko2D.module.js"
-import { strictlyNumber } from "../../ultis/TypeChecks.mjs"
+import { Shape, RECTANGLE } from "./Shapes.mjs";
 
-export class Rectangle {
-    constructor(x = 1, y = 1, width = 1, height = 1) {
-        try {
-            if (!strictlyNumber(x, y, width, height)) {
-                throw new TypeError("From <Neko2D.Shape.Rectangle>, parameters must be numbers.");
-            }
-        } catch (e) {
-            console.error(`${e.stack}\n`);
-            x = y = width = height = 1;
-        } finally {
-            this.center = new Neko2D.V2(x, y);
-            this.width = width;
-            this.height = height;
-        }
+export class Rectangle extends Shape {
+    constructor(x = 0, y = 0, width = 0, height = 0) {
+        this.type = RECTANGLE;
+        this.center = { x: x, y: y };
+        this.width = width;
+        this.height = height;
+    }
+
+    get topLeft() {
+        return { x: center.x - width / 2, y: center.y + height / 2 };
+    }
+
+    get topRight() {
+        return { x: center.x + width / 2, y: center.y + height / 2 };
+    }
+
+    get bottomLeft() {
+        return { x: center.x - width / 2, y: center.y - height / 2 };
+    }
+
+    get bottomRight() {
+        return { x: center.x + width / 2, y: center.y - height / 2 };
     }
 
     get boundary() {
@@ -23,14 +30,18 @@ export class Rectangle {
             topRight: { x: center.x + width / 2, y: center.y + height / 2 },
             bottomLeft: { x: center.x - width / 2, y: center.y - height / 2 },
             bottomRight: { x: center.x + width / 2, y: center.y - height / 2 }
-        }
+        };
     }
 
-    contain = () => {
-
+    get maxReach() {
+        return Math.max(this.width, this.height);
     }
 
-    overlay = () => {
-        
+    get area() {
+        return this.width * this.heigth;
+    }
+
+    get perimeter() {
+        return (this.width + this.heigth) * 2;
     }
 }

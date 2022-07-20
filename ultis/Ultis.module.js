@@ -5,7 +5,7 @@ export {
     Rectangle,
     Circle,
     Triangle
-} from "./Shapes.mjs"
+} from "./shapes/Shapes.module.js"
 
 export { 
     toDegrees,
@@ -38,8 +38,5 @@ export {
 export {
     QUADTREE_CAPACITY,
     SPACE_VIEW_MAX_WIDTH,
-    SPACE_VIEW_MAX_HEIGHT,
-    RECTANGLE,
-    CIRCLE,
-    TRIANGLE
+    SPACE_VIEW_MAX_HEIGHT
 } from "./Constants.mjs"
