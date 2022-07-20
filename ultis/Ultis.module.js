@@ -1,3 +1,7 @@
+export { QuadTree } from "./data-structures/QuadTree.mjs"
+export { SAT } from "./collisions/SAT.mjs"
+// export { Rectangle } from "./shapes/Rectangle.mjs"
+
 export { 
     toDegrees,
     toRadians
@@ -26,10 +30,11 @@ export {
     looselyV2
 } from "./TypeChecks.mjs"
 
-export { Rectangle } from "./shapes/Rectangle.mjs"
-
 export {
     QUADTREE_CAPACITY,
     SPACE_VIEW_MAX_WIDTH,
-    SPACE_VIEW_MAX_HEIGHT
+    SPACE_VIEW_MAX_HEIGHT,
+    RECTANGLE,
+    CIRCLE,
+    TRIANGLE
 } from "./Constants.mjs"

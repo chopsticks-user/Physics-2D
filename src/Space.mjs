@@ -3,7 +3,8 @@ import {
     strictlyNumber, 
     looselyV2,
     SPACE_VIEW_MAX_WIDTH,
-    SPACE_VIEW_MAX_HEIGHT
+    SPACE_VIEW_MAX_HEIGHT,
+    SAT
 } from "../ultis/Ultis.module.js"
 
 ((module) => {
@@ -40,10 +41,11 @@ import {
                         this.view.scale = newScale;
                     }
                 };
-                this.objects = [];
                 this.time = new Neko2D.Time();
+                this.objects = [];
+                this.collision = SAT;
             }
-            Object.freeze(this);
+            // Object.freeze(this);
         };
     }
     return module;

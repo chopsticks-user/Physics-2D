@@ -22,11 +22,10 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
             }
             Object.freeze(this);
         }
-
         set x(value) {
             try {
                 if (!strictlyNumber(value)) {
-                    throw new TypeError("From <Neko2D.V2>, x muse be a number.");
+                    throw new TypeError("From <Neko2D.V2>, x must be a number.");
                 }
                 this.#parameters.x = value;
             } catch (e) {
@@ -37,7 +36,7 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
         set y(value) {
             try {
                 if (!strictlyNumber(value)) {
-                    throw new TypeError("From <Neko2D.V2>, y muse be a number.");
+                    throw new TypeError("From <Neko2D.V2>, y must be a number.");
                 }
                 this.#parameters.y = value;
             } catch (e) {
@@ -109,7 +108,7 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
                 console.error(`${e.stack}\n`);
             }
         }
-
+        
         static fromProperties = (magnitude, direction) => {
             try {
                 if (!strictlyNumber(magnitude, direction)) {

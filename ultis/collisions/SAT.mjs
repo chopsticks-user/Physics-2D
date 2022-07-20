@@ -2,7 +2,7 @@ import Neko2D from "../../Neko2D.mjs"
 
 // const projectOnto = ()
 
-const SAT = (object1, object2) => {
+export const SAT = (object1, object2) => {
     const nSides1 = object1.vertices.length;
     const nSides2 = object2.vertices.length;
 
@@ -15,14 +15,7 @@ const SAT = (object1, object2) => {
             const dot = module.V2.dotProduct(vertex, projAxis);
             min = module.min(min, dot);
             max = module.max(max, dot);
-        })
+
+        });
     });
 }
-
-((module) => {
-    var module = module || {};
-
-    return module;
-})(Neko2D || {});
-
-export default Neko2D;
