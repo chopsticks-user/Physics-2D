@@ -1,7 +1,7 @@
+import Neko2D from "../../Neko2D.module.js"
 import { strictlyNumber } from "../../ultis/TypeChecks.mjs"
 
 export class Rectangle {
-    #parameters
     constructor(x = 1, y = 1, width = 1, height = 1) {
         try {
             if (!strictlyNumber(x, y, width, height)) {
@@ -11,28 +11,26 @@ export class Rectangle {
             console.error(`${e.stack}\n`);
             x = y = width = height = 1;
         } finally {
-            this.#parameters = {
-                x : x,
-                y : y,
-                width : width,
-                height : height
-            }
+            this.center = new Neko2D.V2(x, y);
+            this.width = width;
+            this.height = height;
         }
-        Object.freeze(this);
     }
 
-    /**
-     * @param {number} x
-     * @param {number} y
-     */
-    set center({x, y}) {
-        if (strictlyNumber(x, y)) {
-            this.#parameters.x = x;
-            this.#parameters.y = y;
+    get boundary() {
+        return {
+            topLeft: { x: center.x - width / 2, y: center.y + height / 2 },
+            topRight: { x: center.x + width / 2, y: center.y + height / 2 },
+            bottomLeft: { x: center.x - width / 2, y: center.y - height / 2 },
+            bottomRight: { x: center.x + width / 2, y: center.y - height / 2 }
         }
     }
-    // get center() {
-    //     return {x: this.#parameters.x
-    //         y: this.#parameters.y}
-    // }
+
+    contain = () => {
+
+    }
+
+    overlay = () => {
+        
+    }
 }
