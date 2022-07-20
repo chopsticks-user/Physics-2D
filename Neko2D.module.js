@@ -1,6 +1,5 @@
 import "./src/Space.mjs"
 import "./src/Time.mjs"
-import "./src/shapes/Rectangle.mjs"
 import "./src/objects/Object.mjs"
 import "./src/objects/String.mjs"
 import "./src/objects/Spring.mjs"

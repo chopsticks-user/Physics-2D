@@ -26,6 +26,8 @@ export {
     looselyV2
 } from "./TypeChecks.mjs"
 
+export { Rectangle } from "./shapes/Rectangle.mjs"
+
 export {
     QUADTREE_CAPACITY,
     SPACE_VIEW_MAX_WIDTH,

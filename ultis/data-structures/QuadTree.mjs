@@ -97,12 +97,12 @@ export class QuadTree {
                 throw new TypeError("From <QuadTree.insert>, parameters must be numbers.");
             }
             if (this.contain(x, y, maxReach) === false) {
-                return;
+                return false;
             }
             if (this.#children.NW === null) {
                 if (this.#container.length < QUADTREE_CAPACITY) {
                     this.#container.push({ x: x, y: y, maxReach: maxReach });
-                    return;
+                    return true;
                 }
                 this.#subdivide();
             }
@@ -110,13 +110,12 @@ export class QuadTree {
             this.#children.NE.insert(x, y, maxReach);
             this.#children.SW.insert(x, y, maxReach);
             this.#children.SE.insert(x, y, maxReach);
-
+            return false;
         } catch (e) {
             console.error(`${e.stack}\n`);
+            return false;
         }
     }
 
-    update = () => {
-        return;
-    }
+    findNeighborsOf = () => {}
 }

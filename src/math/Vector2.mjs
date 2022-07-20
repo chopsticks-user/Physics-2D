@@ -4,26 +4,77 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
 ((module) => {
     var module = module || {};
     module.V2 = class {
+        #parameters
         constructor(x = 1, y = 1) {
             try {
                 if (!strictlyNumber(x, y)) {
                     throw new TypeError("From <Neko2D.V2.constructor>, both x and y must be numbers.");
                 }
-                this.x = x;
-                this.y = y;
             } catch (e) {
                 console.error(`${e.stack}\n`);
-                this.x = 1;
-                this.y = 1;
+                x = 1;
+                y = 1;
+            } finally {
+                this.#parameters = {
+                    x: x,
+                    y: y
+                };
+            }
+            Object.freeze(this);
+        }
+
+        set x(value) {
+            try {
+                if (!strictlyNumber(value)) {
+                    throw new TypeError("From <Neko2D.V2>, x muse be a number.");
+                }
+                this.#parameters.x = value;
+            } catch (e) {
+                console.error(`${e.stack}\n`);
             }
         }
 
-        get magnitude() { 
-            return module.sqrt(this.x ** 2 + this.y ** 2);
+        set y(value) {
+            try {
+                if (!strictlyNumber(value)) {
+                    throw new TypeError("From <Neko2D.V2>, y muse be a number.");
+                }
+                this.#parameters.y = value;
+            } catch (e) {
+                console.error(`${e.stack}\n`);
+            }
+        }
+
+        set coord(value) {
+            try {
+                if (!looselyV2(value)) {
+                    throw new TypeError("From <Neko2D.V2>, coord must have type of either {x: number, y: number} or a valid Neko2D.V2 object.");
+                }
+                this.#parameters.x = value.x;
+                this.#parameters.y = value.y;
+            } catch (e) {
+                console.error(`${e.stack}\n`);
+            }
+        }
+
+        get x() {
+            return this.#parameters.x;
+        }
+
+        get y() {
+            return this.#parameters.y;
+        }
+
+        get coord() {
+            return this.#parameters;
+        }
+
+        get magnitude() {
+            return module.sqrt(this.#parameters.x ** 2 + this.#parameters.y ** 2);
         }
 
         get direction() {
-            return module.arctan(this.y / this.x);
+            return module.arctan(this.#parameters.y / this.#parameters.x);
         }
 
         get unit() {
@@ -32,18 +83,18 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
                 if (mag === 0) {
                     throw new Error("From <Neko2D.V2.unit>, devide by zero");
                 }
-                return new module.V2(this.x / mag, this.y / mag);
+                return new module.V2(this.#parameters.x / mag, this.#parameters.y / mag);
             } catch (e) {
                 console.error(`${e.stack}\n`);
             }
         }
 
         get normal() {
-            return new module.V2(this.x, this.y);
+            return new module.V2(this.#parameters.x, this.#parameters.y);
         }
 
-        get opposite() { 
-            return new module.V2(-this.x, -this.y);
+        get opposite() {
+            return new module.V2(-this.#parameters.x, -this.#parameters.y);
         }
 
         static fromPoints = (initialP, terminalP) => {
@@ -55,7 +106,7 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
                 }
                 return new module.V2(terminalP.x - initialP.x, terminalP.y - initialP.y);
             } catch (e) {
-                console.error (`${e.stack}\n`);
+                console.error(`${e.stack}\n`);
             }
         }
 
@@ -160,7 +211,7 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
                 }
                 const dotProducts = this.dotProduct(vectors[2], vectors[0], vectors[1]);
                 return this.sum(
-                    this.scalarProduct(dotProducts[0], vectors[1]), 
+                    this.scalarProduct(dotProducts[0], vectors[1]),
                     this.scalarProduct(-dotProducts[1], vectors[0])
                 );
             } catch (e) {
