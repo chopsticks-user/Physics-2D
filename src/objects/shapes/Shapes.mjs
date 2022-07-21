@@ -3,11 +3,17 @@ export const CIRCLE = "circle";
 export const TRIANGLE = "triangle";
 
 export class Shape {
-    static distance = (target, ...shapes) => {
+    constructor(type = RECTANGLE, center = { x: 0, y: 0 }) {
+        this.type = type;
+        this.center = center;
+    }
+
+    distance = (...shapes) => {
         const len = shapes.length;
         const results = shapes.map((shape) => {
+            const { x, y } = shape.type ? shape.center : shape;
             return Math.sqrt(
-                (target.center.x - shape.center.x) ** 2 + (target.center.y - shape.center.y) ** 2
+                (this.center.x - x) ** 2 + (this.center.y - y) ** 2
             );
         })
         return !len ? len : (len === 1 ? results[0] : results);

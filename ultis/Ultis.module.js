@@ -1,12 +1,3 @@
-export { QuadTree } from "./data-structures/QuadTree.mjs"
-export { SAT } from "./collisions/SAT.mjs"
-
-export {
-    Rectangle,
-    Circle,
-    Triangle
-} from "./shapes/Shapes.module.js"
-
 export { 
     toDegrees,
     toRadians

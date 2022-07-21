@@ -1,7 +1,5 @@
 import Neko2D from "../../Neko2D.mjs"
 
-// const projectOnto = ()
-
 export const SAT = (object1, object2) => {
     const nSides1 = object1.vertices.length;
     const nSides2 = object2.vertices.length;

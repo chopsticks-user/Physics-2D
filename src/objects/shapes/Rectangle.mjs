@@ -2,10 +2,27 @@ import { Shape, RECTANGLE } from "./Shapes.mjs";
 
 export class Rectangle extends Shape {
     constructor(x = 0, y = 0, width = 0, height = 0) {
-        this.type = RECTANGLE;
-        this.center = { x: x, y: y };
-        this.width = width;
-        this.height = height;
+        super(RECTANGLE, { x: x, y: y });
+        this.parameters = { 
+            width: width,
+            height: height
+        };
+    }
+
+    contain = (otherObject) => {
+        if (this.center.y - this.parameters.height > otherObject.topLeft.y) {
+            return false;
+        }
+        if (this.center.y + this.parameters.height < otherObject.bottomRight.y) {
+            return false;
+        }
+        if (this.center.x - this.parameters.width > otherObject.bottomRight.x) {
+            return false;
+        }
+        if (this.center.x + this.parameters.width < otherObject.topLeft.x) {
+            return false;
+        }
+        return true;
     }
 
     get topLeft() {

@@ -43,7 +43,6 @@ import {
                 };
                 this.time = new Neko2D.Time();
                 this.objects = [];
-                this.collision = SAT;
             }
             // Object.freeze(this);
         };

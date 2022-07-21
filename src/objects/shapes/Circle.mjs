@@ -1,17 +1,9 @@
 import { Shape, CIRCLE } from "./Shapes.mjs";
 
 export class Circle extends Shape {
-    constructor(radius = 0) {
-        this.type = CIRCLE;
+    constructor(radius = 0, x = 0, y = 0) {
+        super(CIRCLE, {x: x, y: y})
         this.radius = radius;
-    }
-
-    get distanceFromCenterToEachVertex() {
-        return this.radius;
-    }
-
-    get maxReach() {
-        return this.radius;
     }
 
     get area() {
