@@ -16,7 +16,7 @@ import { SAT } from "../collisions/SAT.mjs"
         };
 
         get typename() {
-            return Neko2D.OBJECT;
+            return module.OBJECT;
         }
 
         get vertices() {
@@ -24,7 +24,7 @@ import { SAT } from "../collisions/SAT.mjs"
         }
 
         intersect = (object) => {
-            if (!object || object.typename !== Neko2D.OBJECT) {
+            if (!object || object.typename !== module.OBJECT) {
                 return false;
             }
             return this.shape.intersect(object.shape);
