@@ -6,7 +6,7 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
     module.V2 = class {
         constructor(x = 1, y = 1) {
             if (!strictlyNumber(x, y)) {
-                console.warn("From Neko2D.V2.constructor, default vector <1, 1> created.");
+                console.warn("From Neko2D.V2.constructor, a default vector was created.");
                 x = y = 1;
             }
             this.x = x;

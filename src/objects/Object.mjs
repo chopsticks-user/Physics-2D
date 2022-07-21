@@ -4,29 +4,15 @@ import { SAT } from "../collisions/SAT.mjs"
 ((module) => {
     var module = module || {};
     module.Object = class {
-        constructor(shape, properties) {
-            try {
-                if (!shape) {
-                    shape = new Neko2D.Circle();
-                }
-                if (!properties) {
-                    properties = new Neko2D.Properties();
-                }
-                if (shape.typename !== "NekoShape") {
-                    
-                }
-                if (properties.typename !== "NekoProperties") {
-                    throw new TypeError("From <Neko2D.Object.constructor>, shape object is not recognized by Neko2D.");
-                }
-            } catch (e) {
-                console.error(`${e.stack}\n`);
+        constructor(shape = new Neko2D.Circle(), properties = new Neko2D.Properties()) {
+            if (shape.typename !== module.SHAPE || properties.typename !== module.PROPERTIES) {
+                console.warn("From Neko2D.Object.constructor, a default object was created.");
                 shape = new Neko2D.Circle();
                 properties = new Neko2D.Properties();
-            } finally {
-                this.shape = shape;
-                this.properties = properties;
-                this.time = new Neko2D.Time(); 
             }
+            this.shape = shape;
+            this.properties = properties;
+            this.time = new Neko2D.Time();
         };
 
         get typename() {
@@ -38,17 +24,10 @@ import { SAT } from "../collisions/SAT.mjs"
         }
 
         intersect = (object) => {
-            try {
-                if (object.typename !== Neko2D.OBJECT) {
-                    throw new TypeError(
-                        "From <Neko2D.Object.intersect>, object is not recognized by Neko2D."
-                    );
-                }
-                return this.shape.intersect(object.shape);
-            } catch (e) {
-                console.error(`${e.stack}\n`);
+            if (!object || object.typename !== Neko2D.OBJECT) {
+                return false;
             }
-            return false;
+            return this.shape.intersect(object.shape);
         }
 
         move = (dt = 0, dax = 0, day = 0) => {
