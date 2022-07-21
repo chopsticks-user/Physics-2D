@@ -1,4 +1,4 @@
-import { strictlyNumber, QUADTREE_CAPACITY } from "../../Ultis/Ultis.module.js"
+import { QUADTREE_CAPACITY } from "../../Ultis/Ultis.module.js"
 
 export class QuadTree {
     #container;
@@ -6,28 +6,17 @@ export class QuadTree {
     #children;
 
     constructor(width = 0, height = 0, center = { x: 0, y: 0 }) {
-        try {
-            if (!strictlyNumber(width, height, center.x, center.y)) {
-                throw new TypeError("From <Ultis.QuadTree.constructor>, parameters must be numbers.");
-            }
-        } catch (e) {
-            console.error(`${e.stack}\n`);
-            width = height = 0;
-            center = { x: 0, y: 0 };
-        } finally {
-            this.#container = [];
-            this.#boundary = {
-                topLeft: { x: center.x - width / 2, y: center.y + height / 2 },
-                bottomRight: { x: center.x + width / 2, y: center.y - height / 2 }
-            }
-            this.#children = {
-                NW: null,
-                NE: null,
-                SW: null,
-                SE: null
-            };
+        this.#container = [];
+        this.#boundary = {
+            topLeft: { x: center.x - width / 2, y: center.y + height / 2 },
+            bottomRight: { x: center.x + width / 2, y: center.y - height / 2 }
         }
-        Object.freeze(this);
+        this.#children = {
+            NW: null,
+            NE: null,
+            SW: null,
+            SE: null
+        };
     }
 
     #subdivide = () => {
@@ -36,7 +25,7 @@ export class QuadTree {
         const childCenters = {
             NW: {
                 x: this.#boundary.topLeft.x + 0.5 * subWidth,
-                y: this.#boundary.bottomRight.y + 1.5 * subHeight  
+                y: this.#boundary.bottomRight.y + 1.5 * subHeight
             },
             NE: {
                 x: this.#boundary.topLeft.x + 1.5 * subWidth,
@@ -57,65 +46,50 @@ export class QuadTree {
         this.#children.SW = new QuadTree(subWidth, subHeight, childCenters.SW);
         this.#children.SE = new QuadTree(subWidth, subHeight, childCenters.SE);
 
-        this.#container.forEach((value) => {
+        let len = this.#container.length;
+        while (len--) {
             this.#children.NW.insert(value.x, value.y, value.maxReach);
             this.#children.NE.insert(value.x, value.y, value.maxReach);
             this.#children.SW.insert(value.x, value.y, value.maxReach);
             this.#children.SE.insert(value.x, value.y, value.maxReach);
-        });
+        };
 
         this.#container = [];
     }
 
     contain = (x, y, maxReach) => {
-        try {
-            if (!strictlyNumber(x, y, maxReach)) {
-                throw new TypeError("From Ultis.QuadTree.contain, parameters muse be numbers.");
-            }
-            if (y - maxReach > this.#boundary.topLeft.y) {
-                return false;
-            }
-            if (y + maxReach < this.#boundary.bottomRight.y) {
-                return false;
-            }
-            if (x - maxReach > this.#boundary.bottomRight.x) {
-                return false;
-            }
-            if (x + maxReach < this.#boundary.topLeft.x) {
-                return false;
-            }
-            return true;
-        } catch (e) {
-            console.error(`${e.stack}\n`);
+        if (y - maxReach > this.#boundary.topLeft.y) {
             return false;
         }
+        if (y + maxReach < this.#boundary.bottomRight.y) {
+            return false;
+        }
+        if (x - maxReach > this.#boundary.bottomRight.x) {
+            return false;
+        }
+        if (x + maxReach < this.#boundary.topLeft.x) {
+            return false;
+        }
+        return true;
     }
 
     insert = (x, y, maxReach) => {
-        try {
-            if (!strictlyNumber(x, y, maxReach)) {
-                throw new TypeError("From <QuadTree.insert>, parameters must be numbers.");
-            }
-            if (this.contain(x, y, maxReach) === false) {
-                return false;
-            }
-            if (this.#children.NW === null) {
-                if (this.#container.length < QUADTREE_CAPACITY) {
-                    this.#container.push({ x: x, y: y, maxReach: maxReach });
-                    return true;
-                }
-                this.#subdivide();
-            }
-            this.#children.NW.insert(x, y, maxReach);
-            this.#children.NE.insert(x, y, maxReach);
-            this.#children.SW.insert(x, y, maxReach);
-            this.#children.SE.insert(x, y, maxReach);
-            return false;
-        } catch (e) {
-            console.error(`${e.stack}\n`);
+        if (this.contain(x, y, maxReach) === false) {
             return false;
         }
+        if (this.#children.NW === null) {
+            if (this.#container.length < QUADTREE_CAPACITY) {
+                this.#container.push({ x: x, y: y, maxReach: maxReach });
+                return true;
+            }
+            this.#subdivide();
+        }
+        this.#children.NW.insert(x, y, maxReach);
+        this.#children.NE.insert(x, y, maxReach);
+        this.#children.SW.insert(x, y, maxReach);
+        this.#children.SE.insert(x, y, maxReach);
+        return false;
     }
 
-    findNeighborsOf = () => {}
+    findNeighborsOf = () => { }
 }

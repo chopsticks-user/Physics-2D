@@ -4,7 +4,13 @@ import { SAT } from "../collisions/SAT.mjs"
 ((module) => {
     var module = module || {};
     module.Object = class {
-        constructor(shape = new Neko2D.Circle(), properties = new Neko2D.Properties()) {
+        constructor(shape, properties) {
+            if (!shape) {
+                shape = new Neko2D.Circle();
+            }
+            if (!properties) {
+                properties = new Neko2D.Properties();
+            }
             if (shape.typename !== module.SHAPE || properties.typename !== module.PROPERTIES) {
                 console.warn("From Neko2D.Object.constructor, a default object was created.");
                 shape = new Neko2D.Circle();

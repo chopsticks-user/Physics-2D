@@ -1,14 +1,13 @@
 import Neko2D from "../../../Neko2D.mjs"
-import { looselyV2 } from "../../../ultis/TypeChecks.mjs";
 
 export class Shape {
     constructor(type = "circle", center = { x: 0, y: 0 }) {
         this.type = type;
-        this.center = new module.V2(center.x, center.y);
+        this.center = new Neko2D.V2(center.x, center.y);
     }
 
     get typename() {
-        return module.SHAPE;
+        return Neko2D.SHAPE;
     }
 
     static get shapeList() {
@@ -21,23 +20,20 @@ export class Shape {
 
     distance = (...args) => {
         let len = args.length;
-        let valid = true;
+        if (!len) {
+            // console.warn("From Shape.distance, no argument.");
+            return;
+        }
         const results = args.map((arg) => {
-            if (arg.typename === module.SHAPE) {
+            if (arg.typename === Neko2D.SHAPE) {
                 return Math.sqrt(
                     (this.center.x - arg.center.x) ** 2 + (this.center.y - arg.center.y) ** 2
                 );
             }
-            if (looselyV2(arg)) {
-                return Math.sqrt(
-                    (this.center.x - arg.x) ** 2 + (this.center.y - arg.y) ** 2
-                );
-            }
-            valid = false;
+            return Math.sqrt(
+                (this.center.x - arg.x) ** 2 + (this.center.y - arg.y) ** 2
+            );
         });
-        if (!valid || !len) {
-            return;
-        }
         return len === 1 ? results[0] : results;
     }
 }

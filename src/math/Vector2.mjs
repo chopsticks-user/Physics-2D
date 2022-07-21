@@ -5,10 +5,10 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
     var module = module || {};
     module.V2 = class {
         constructor(x = 1, y = 1) {
-            if (!strictlyNumber(x, y)) {
-                console.warn("From Neko2D.V2.constructor, a default vector was created.");
-                x = y = 1;
-            }
+            // if (!strictlyNumber(x, y)) {
+            //     console.warn("From Neko2D.V2.constructor, a default vector was created.");
+            //     x = y = 1;
+            // }
             this.x = x;
             this.y = y;
         }
@@ -47,29 +47,29 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
         }
 
         static fromPoints = (initialP, terminalP) => {
-            if (!looselyV2(initialP, terminalP)) {
-                console.warn("From Neko2D.V2.fromProperties, invalid arguments.");
-                return;
-            }
+            // if (!looselyV2(initialP, terminalP)) {
+            //     console.warn("From Neko2D.V2.fromProperties, invalid arguments.");
+            //     return;
+            // }
             return new module.V2(terminalP.x - initialP.x, terminalP.y - initialP.y);
 
         }
 
         static fromProperties = (magnitude, direction) => {
-            if (!strictlyNumber(magnitude, direction)) {
-                console.warn("From Neko2D.V2.fromProperties, both magnitude and direction must be numbers.");
-                return;
-            }
+            // if (!strictlyNumber(magnitude, direction)) {
+            //     console.warn("From Neko2D.V2.fromProperties, both magnitude and direction must be numbers.");
+            //     return;
+            // }
             const x = Math.sqrt(magnitude ** 2 / (Math.tan(direction) ** 2 + 1));
             const y = x * Math.tan(direction);
             return new Math.V2(x, y);
         }
 
         static sum = (...vectors) => {
-            if (!looselyV2(...vectors)) {
-                console.warn("From Neko2D.V2.sum, an invalid vector was detected.");
-                return;
-            }
+            // if (!looselyV2(...vectors)) {
+            //     console.warn("From Neko2D.V2.sum, an invalid vector was detected.");
+            //     return;
+            // }
             let len = vectors.length;
             let results = new module.V2(0, 0);
             while (len--) {
@@ -80,14 +80,14 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
         }
 
         static scalarProduct = (scalar, ...vectors) => {
-            if (!strictlyNumber(scalar)) {
-                console.warn("From Neko2D.V2.dotProduct, invalid scalar.");
-                return;
-            }
-            if (!looselyV2(...vectors)) {
-                console.warn("From Neko2D.V2.dotProduct, an invalid vector was detected.");
-                return;
-            }
+            // if (!strictlyNumber(scalar)) {
+            //     console.warn("From Neko2D.V2.dotProduct, invalid scalar.");
+            //     return;
+            // }
+            // if (!looselyV2(...vectors)) {
+            //     console.warn("From Neko2D.V2.dotProduct, an invalid vector was detected.");
+            //     return;
+            // }
             const len = vectors.length;
             if (len === 0) {
                 return scalar;
@@ -99,10 +99,10 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
         }
 
         static dotProduct = (rVector, ...lVectors) => {
-            if (!looselyV2(rVector, ...lVectors)) {
-                console.warn("From Neko2D.V2.dotProduct, an invalid vector was deteced.");
-                return;
-            }
+            // if (!looselyV2(rVector, ...lVectors)) {
+            //     console.warn("From Neko2D.V2.dotProduct, an invalid vector was deteced.");
+            //     return;
+            // }
             const len = lVectors.length;
             if (!len) {
                 return rVector;
@@ -114,14 +114,14 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
         }
 
         static crossProduct = (...vectors) => {
-            if (!looselyV2(...vectors)) {
-                console.warn("From Neko2D.V2.crossProduct, an invalid vector was deteced.");
-                return;
-            }
+            // if (!looselyV2(...vectors)) {
+            //     console.warn("From Neko2D.V2.crossProduct, an invalid vector was deteced.");
+            //     return;
+            // }
             const len = vectors.length;
             switch (len) {
                 case 0: {
-                    console.warn("From Neko2D.V2.crossProduct, no argument.")
+                    console.warn("From Neko2D.V2.crossProduct, no argument.");
                     return;
                 }
                 case 1: {
