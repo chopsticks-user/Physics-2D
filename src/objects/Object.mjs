@@ -1,22 +1,29 @@
 import Neko2D from "../../Neko2D.mjs"
 import { SAT } from "../collisions/SAT.mjs"
-import * as S from "./shapes/Shapes.module.js"
 
 ((module) => {
     var module = module || {};
     module.Object = class {
-        constructor({
-            rx = 0, ry = 0,
-            vx = 0, vy = 0,
-            ax = 0, ay = 0,
-            mass = 0
-        }) {
-            this.position = { x: rx, y: ry };
-            this.velocity = { x: vx, y: vy };
-            this.acceleration = { x: ax, y: ay };
-            this.shape = new S.Circle;
-            this.mass = mass;
+        constructor(shape, properties) {
+            try {
+                if (shape) {
+                    if(shape.typename !== "NekoShape") {
+                        throw new Error("From <Neko2D.Object.constructor>, shape object is not recognized by Neko2D.");
+                    }
+                    if(properties.typename !== "NekoProperties") {
+                        throw new Error("From <Neko2D.Object.constructor>, shape object is not recognized by Neko2D.");
+                    }
+                }
+            } catch (e) {
+
+            }
+            if (this.shape)
+            this.shape = new Neko2D.Circle;
         };
+
+        get typename() {
+            return "NekoObject";
+        }
 
         intersect = (object) => {
             return SAT(this, object);

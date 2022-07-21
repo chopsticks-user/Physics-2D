@@ -10,6 +10,9 @@ import { timeStart } from "../ultis/Ultis.module.js"
             this.unit = "ms";
             this.memo = [this.start];
         }
+        get typename() {
+            return "NekoTime";
+        }
         get current() {
             const currentTime = timeStart();
             this.memo.push(currentTime);
@@ -17,7 +20,6 @@ import { timeStart } from "../ultis/Ultis.module.js"
             return currentTime;
         }
     }
-    Object.freeze(module.Time);
     return module;
 })(Neko2D || {});
 

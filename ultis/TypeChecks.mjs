@@ -27,3 +27,4 @@ export const looselyV2 = (...vectors) => {
     }
     return vectors.length ? true: false;
 }
+

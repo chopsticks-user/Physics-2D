@@ -3,8 +3,7 @@ import {
     strictlyNumber, 
     looselyV2,
     SPACE_VIEW_MAX_WIDTH,
-    SPACE_VIEW_MAX_HEIGHT,
-    SAT
+    SPACE_VIEW_MAX_HEIGHT
 } from "../ultis/Ultis.module.js"
 
 ((module) => {
@@ -46,6 +45,9 @@ import {
             }
             // Object.freeze(this);
         };
+        get typename() {
+            return "NekoSpace";
+        }
     }
     return module;
 })(Neko2D || {});

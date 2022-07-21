@@ -22,6 +22,11 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
             }
             Object.freeze(this);
         }
+
+        get typename() {
+            return "NekoV2";
+        }
+
         set x(value) {
             try {
                 if (!strictlyNumber(value)) {

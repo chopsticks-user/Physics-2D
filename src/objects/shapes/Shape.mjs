@@ -1,11 +1,15 @@
-export const RECTANGLE = "rectangle";
-export const CIRCLE = "circle";
-export const TRIANGLE = "triangle";
-
 export class Shape {
-    constructor(type = RECTANGLE, center = { x: 0, y: 0 }) {
+    constructor(type = "circle", center = { x: 0, y: 0 }) {
         this.type = type;
         this.center = center;
+    }
+
+    get typename() {
+        return "NekoShape";
+    }
+
+    get ShapeList() {
+        return ["circle", "rectangle", "triangle"];
     }
 
     distance = (...shapes) => {

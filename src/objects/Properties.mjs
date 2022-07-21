@@ -4,7 +4,12 @@ import { looselyV2, strictlyNumber } from "../../ultis/Ultis.module.js"
 ((module) => {
     var module = module || {};
     module.Properties = class {
-        constructor(position, velocity, acceleration, mass = 1) {
+        constructor(
+            position = { x: 0, y: 0 },
+            velocity = { x: 0, y: 0 },
+            acceleration = { x: 0, y: 0 },
+            mass = 1
+        ) {
             try {
                 if (!looselyV2(position, velocity, acceleration)) {
                     throw new TypeError(
@@ -17,13 +22,17 @@ import { looselyV2, strictlyNumber } from "../../ultis/Ultis.module.js"
                         "From <Neko2D.Properties.constructor>, mass must be a number."
                     );
                 }
+            } catch (e) {
+                console.error(`${e.stack}\n`);
+            } finally {
                 this.position = new Neko2D.V2(position.x, position.y);
                 this.velocity = new Neko2D.V2(velocity.x, velocity.y);
                 this.acceleration = new Neko2D.V2(acceleration.x, acceleration.y);
                 this.mass = mass;
-            } catch (e) {
-                console.error(`${e.stack}\n`);
             }
+        }
+        get typename() {
+            return "NekoProperties";
         }
         set position(newPosition) {
             if (looselyV2(newPosition)) {
