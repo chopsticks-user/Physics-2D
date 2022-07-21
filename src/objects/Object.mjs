@@ -13,7 +13,7 @@ import { SAT } from "../collisions/SAT.mjs"
                     properties = new Neko2D.Properties();
                 }
                 if (shape.typename !== "NekoShape") {
-                    throw new TypeError("From <Neko2D.Object.constructor>, shape object is not recognized by Neko2D.");
+                    
                 }
                 if (properties.typename !== "NekoProperties") {
                     throw new TypeError("From <Neko2D.Object.constructor>, shape object is not recognized by Neko2D.");

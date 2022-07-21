@@ -41,7 +41,7 @@ import { strictlyNumber, looselyV2 } from "../../../ultis/TypeChecks.mjs"
         }
 
         intersect = (rhs) => {
-            if (this.maxReach + rhs.maxReach < this.distance(rhs)) {
+            if (!this.outOfRange(rhs)) {
                 return false;
             }
             if (rhs.type === "circle") {

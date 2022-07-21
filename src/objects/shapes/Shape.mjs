@@ -14,6 +14,7 @@ export class Shape {
         } finally {
             this.type = type;
             this.center = new Neko2D.V2(center.x, center.y);
+            this.rotate = 0;
         }
     }
 
@@ -24,6 +25,10 @@ export class Shape {
     static get shapeList() {
         return ["circle", "rectangle", "triangle"];
     }
+
+    outOfRange = (rhs) => {
+        return this.maxReach + rhs.maxReach >= this.distance(rhs);
+    } 
 
     distance = (...args) => {
         try {

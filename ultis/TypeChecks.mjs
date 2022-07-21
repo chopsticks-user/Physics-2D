@@ -1,30 +1,30 @@
 export const strictlyNumber = (...args) => {
-    for (const arg of args) {
-        if (typeof arg !== "number" || arg !== arg || Math.abs(arg) === Infinity) {
+    let len = args.length;
+    while (len--) {
+        if (typeof args[len] !== "number" || args[len] !== args[len] || Math.abs(args[len]) === Infinity) {
             return false;
         }
     }
-    return args.length ? true: false;
+    return len ? true: false;
 }
 
 export const looselyNumber = (...args) => {
-    for (const arg of args) {
-        if (typeof arg !== "number" || arg !== arg) {
+    let len = args.length;
+    while (len--) {
+        if (typeof args[len] !== "number" || args[len] !== args[len]) {
             return false;
         }
     }
-    return args.length ? true: false;
+    return len ? true: false;
 }
 
-export const looselyV2 = (...vectors) => {
-    for (const vector of vectors) {
-        if (!vector) {
-            return false;
-        }
-        if (!strictlyNumber(vector.x, vector.y)) {
+export const looselyV2 = (...args) => {
+    let len = args.length;
+    while (len--) {
+        if (!args[len] || !strictlyNumber(args[len].x, args[len].y)) {
             return false;
         }
     }
-    return vectors.length ? true: false;
+    return len ? true: false;
 }
 
