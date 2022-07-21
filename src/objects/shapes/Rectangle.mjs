@@ -28,29 +28,13 @@ import { Shape } from "./Shape.mjs";
             return true;
         }
     
-        get topLeft() {
-            return { x: center.x - width / 2, y: center.y + height / 2 };
-        }
-    
-        get topRight() {
-            return { x: center.x + width / 2, y: center.y + height / 2 };
-        }
-    
-        get bottomLeft() {
-            return { x: center.x - width / 2, y: center.y - height / 2 };
-        }
-    
-        get bottomRight() {
-            return { x: center.x + width / 2, y: center.y - height / 2 };
-        }
-    
-        get boundary() {
-            return {
-                topLeft: { x: center.x - width / 2, y: center.y + height / 2 },
-                topRight: { x: center.x + width / 2, y: center.y + height / 2 },
-                bottomLeft: { x: center.x - width / 2, y: center.y - height / 2 },
-                bottomRight: { x: center.x + width / 2, y: center.y - height / 2 }
-            };
+        get vertices() {
+            return [
+                { x: center.x - width / 2, y: center.y + height / 2 },
+                { x: center.x + width / 2, y: center.y + height / 2 },
+                { x: center.x - width / 2, y: center.y - height / 2 },
+                { x: center.x + width / 2, y: center.y - height / 2 }
+            ];
         }
     
         get maxReach() {

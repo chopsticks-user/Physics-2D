@@ -23,7 +23,7 @@ import { strictlyNumber, looselyV2 } from "../../../ultis/TypeChecks.mjs"
                 radius = 0;
                 center = { x: 0, y: 0 };
             } finally {
-                super("cirle", center);
+                super("circle", center);
                 this.radius = radius;
             }
         }
@@ -38,6 +38,26 @@ import { strictlyNumber, looselyV2 } from "../../../ultis/TypeChecks.mjs"
     
         get circumference() {
             return Math.PI * this.radius * 2;
+        }
+
+        intersect = (rhs) => {
+            if (this.maxReach + rhs.maxReach < this.distance(rhs)) {
+                return false;
+            }
+            if (rhs.type === "circle") {
+                return true;
+            }
+            let minDistance = Infinity;
+            let nVertices = rhs.vertices.length;
+            while (nVertices--) {
+                minDistance = Math.min(
+                    minDistance, this.distance(rhs.vertices[nVertices])
+                );
+                if (minDistance <= this.radius) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
     return module;

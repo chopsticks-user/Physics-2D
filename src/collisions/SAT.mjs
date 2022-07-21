@@ -1,6 +1,15 @@
 import Neko2D from "../../Neko2D.mjs"
 
 export const SAT = (object1, object2) => {
+    if (object1.maxReach + object2.maxReach < object1.distance(object2)) {
+        return false;
+    }
+    if (object1.typename === "circle" && object2.typename === "circle") {
+        return true;
+    }
+    if (object1.type === "circle") {
+
+    }
     const nSides1 = object1.vertices.length;
     const nSides2 = object2.vertices.length;
 

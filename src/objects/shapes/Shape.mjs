@@ -25,15 +25,27 @@ export class Shape {
         return ["circle", "rectangle", "triangle"];
     }
 
-    distance = (...shapes) => {
-
-        const len = shapes.length;
-        const results = shapes.map((shape) => {
-            const { x, y } = shape.type ? shape.center : shape;
-            return Math.sqrt(
-                (this.center.x - x) ** 2 + (this.center.y - y) ** 2
-            );
-        })
-        return !len ? len : (len === 1 ? results[0] : results);
+    distance = (...args) => {
+        try {
+            let len = args.length;
+            const results = args.map((arg) => {
+                if (arg.typename === Neko2D.SHAPE) {
+                    return Math.sqrt(
+                        (this.center.x - arg.center.x) ** 2 + (this.center.y - arg.center.y) ** 2
+                    );
+                }
+                if (looselyV2(arg)) {
+                    return Math.sqrt(
+                        (this.center.x - arg.x) ** 2 + (this.center.y - arg.y) ** 2
+                    );
+                }
+                throw new TypeError(
+                    "each argument must be a shape, an object type of {x: number, y: number} or a valid Neko2D.V2 object."
+                );
+            });
+            return !len ? len : (len === 1 ? results[0] : results);
+        } catch (e) {
+            console.error(`${e.stack}\n`);
+        }
     }
 }

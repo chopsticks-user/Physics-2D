@@ -25,12 +25,16 @@ import { SAT } from "../collisions/SAT.mjs"
             } finally {
                 this.shape = shape;
                 this.properties = properties;
-                this.time = new Neko2D.Time();
+                this.time = new Neko2D.Time(); 
             }
         };
 
         get typename() {
             return Neko2D.OBJECT;
+        }
+
+        get vertices() {
+            return this.shape.vertices;
         }
 
         intersect = (object) => {
@@ -40,7 +44,7 @@ import { SAT } from "../collisions/SAT.mjs"
                         "From <Neko2D.Object.intersect>, object is not recognized by Neko2D."
                     );
                 }
-                return SAT(this, object);
+                return this.shape.intersect(object.shape);
             } catch (e) {
                 console.error(`${e.stack}\n`);
             }
