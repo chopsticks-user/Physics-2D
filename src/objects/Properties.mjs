@@ -31,35 +31,9 @@ import { looselyV2, strictlyNumber } from "../../ultis/Ultis.module.js"
                 this.mass = mass;
             }
         }
+
         get typename() {
-            return "NekoProperties";
-        }
-        set position(newPosition) {
-            if (looselyV2(newPosition)) {
-                this.position.x = newPosition.x;
-                this.position.y = newPosition.y;
-            }
-        }
-        get position() {
-            return this.position.coord;
-        }
-        set velocity(newVelocity) {
-            if (looselyV2(newVelocity)) {
-                this.velocity.x = newVelocity.x;
-                this.velocity.y = newVelocity.y;
-            }
-        }
-        get velocity() {
-            return this.velocity.coord;
-        }
-        set acceleration(newAcceleration) {
-            if (looselyV2(newAcceleration)) {
-                this.acceleration.x = newAcceleration.x;
-                this.acceleration.y = newAcceleration.y;
-            }
-        }
-        get acceleration() {
-            return this.acceleration.coord;
+            return Neko2D.PROPERTIES;
         }
     }
     return module;

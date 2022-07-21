@@ -15,4 +15,5 @@ import "./src/math/Functions.mjs"
 import "./src/Constants.mjs"
 import Neko2D from "./Neko2D.mjs"
 
+Object.freeze(Neko2D);
 export default Neko2D;

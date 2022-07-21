@@ -1,3 +1,5 @@
+import Neko2D from "../../../Neko2D.mjs"
+
 export class Shape {
     constructor(type = "circle", center = { x: 0, y: 0 }) {
         this.type = type;
@@ -5,10 +7,10 @@ export class Shape {
     }
 
     get typename() {
-        return "NekoShape";
+        return Neko2D.SHAPE;
     }
 
-    get ShapeList() {
+    static get shapeList() {
         return ["circle", "rectangle", "triangle"];
     }
 

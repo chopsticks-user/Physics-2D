@@ -11,7 +11,7 @@ import { timeStart } from "../ultis/Ultis.module.js"
             this.memo = [this.start];
         }
         get typename() {
-            return "NekoTime";
+            return Neko2D.TIME;
         }
         get current() {
             const currentTime = timeStart();

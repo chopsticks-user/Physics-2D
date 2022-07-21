@@ -4,7 +4,6 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
 ((module) => {
     var module = module || {};
     module.V2 = class {
-        #parameters
         constructor(x = 1, y = 1) {
             try {
                 if (!strictlyNumber(x, y)) {
@@ -15,70 +14,21 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
                 x = 1;
                 y = 1;
             } finally {
-                this.#parameters = {
-                    x: x,
-                    y: y
-                };
+                this.x = x;
+                this.y = y;
             }
-            Object.freeze(this);
         }
 
         get typename() {
-            return "NekoV2";
-        }
-
-        set x(value) {
-            try {
-                if (!strictlyNumber(value)) {
-                    throw new TypeError("From <Neko2D.V2>, x must be a number.");
-                }
-                this.#parameters.x = value;
-            } catch (e) {
-                console.error(`${e.stack}\n`);
-            }
-        }
-
-        set y(value) {
-            try {
-                if (!strictlyNumber(value)) {
-                    throw new TypeError("From <Neko2D.V2>, y must be a number.");
-                }
-                this.#parameters.y = value;
-            } catch (e) {
-                console.error(`${e.stack}\n`);
-            }
-        }
-
-        set coord(value) {
-            try {
-                if (!looselyV2(value)) {
-                    throw new TypeError("From <Neko2D.V2>, coord must have type of either {x: number, y: number} or a valid Neko2D.V2 object.");
-                }
-                this.#parameters.x = value.x;
-                this.#parameters.y = value.y;
-            } catch (e) {
-                console.error(`${e.stack}\n`);
-            }
-        }
-
-        get x() {
-            return this.#parameters.x;
-        }
-
-        get y() {
-            return this.#parameters.y;
-        }
-
-        get coord() {
-            return this.#parameters;
+            return Neko2D.VECTOR2;
         }
 
         get magnitude() {
-            return module.sqrt(this.#parameters.x ** 2 + this.#parameters.y ** 2);
+            return module.sqrt(this.x ** 2 + this.y ** 2);
         }
 
         get direction() {
-            return module.arctan(this.#parameters.y / this.#parameters.x);
+            return module.arctan(this.y / this.x);
         }
 
         get unit() {
@@ -87,18 +37,18 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
                 if (mag === 0) {
                     throw new Error("From <Neko2D.V2.unit>, devide by zero");
                 }
-                return new module.V2(this.#parameters.x / mag, this.#parameters.y / mag);
+                return new module.V2(this.x / mag, this.y / mag);
             } catch (e) {
                 console.error(`${e.stack}\n`);
             }
         }
 
         get normal() {
-            return new module.V2(this.#parameters.x, this.#parameters.y);
+            return new module.V2(this.x, this.y);
         }
 
         get opposite() {
-            return new module.V2(-this.#parameters.x, -this.#parameters.y);
+            return new module.V2(-this.x, -this.y);
         }
 
         static fromPoints = (initialP, terminalP) => {
@@ -223,7 +173,6 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
             }
         }
     }
-    Object.freeze(module.V2);
     return module;
 })(Neko2D || {});
 

@@ -9,6 +9,7 @@ import {
 ((module) => {
     var module = module || {};
     module.Space = class {
+        static #idList = [];
         constructor(width = 0, height = 0, center = {x: 0, y: 0}) {
             try {
                 if (!strictlyNumber(width, height, center.x, center.y)) {
@@ -46,7 +47,7 @@ import {
             // Object.freeze(this);
         };
         get typename() {
-            return "NekoSpace";
+            return Neko2D.SPACE;
         }
     }
     return module;

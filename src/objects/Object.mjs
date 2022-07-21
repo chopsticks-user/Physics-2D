@@ -6,27 +6,44 @@ import { SAT } from "../collisions/SAT.mjs"
     module.Object = class {
         constructor(shape, properties) {
             try {
-                if (shape) {
-                    if(shape.typename !== "NekoShape") {
-                        throw new Error("From <Neko2D.Object.constructor>, shape object is not recognized by Neko2D.");
-                    }
-                    if(properties.typename !== "NekoProperties") {
-                        throw new Error("From <Neko2D.Object.constructor>, shape object is not recognized by Neko2D.");
-                    }
+                if (!shape) {
+                    shape = new Neko2D.Circle();
+                }
+                if (!properties) {
+                    properties = new Neko2D.Properties();
+                }
+                if (shape.typename !== "NekoShape") {
+                    shape = new Neko2D.Circle();
+                    throw new Error("From <Neko2D.Object.constructor>, shape object is not recognized by Neko2D.");
+                }
+                if (properties.typename !== "NekoProperties") {
+                    properties = new Neko2D.Properties();
+                    throw new Error("From <Neko2D.Object.constructor>, shape object is not recognized by Neko2D.");
                 }
             } catch (e) {
-
+                console.error(`${e.stack}\n`);
+            } finally {
+                this.shape = shape;
+                this.properties = properties;
+                this.time = new Neko2D.Time();
             }
-            if (this.shape)
-            this.shape = new Neko2D.Circle;
         };
 
         get typename() {
-            return "NekoObject";
+            return Neko2D.OBJECT;
         }
 
         intersect = (object) => {
-            return SAT(this, object);
+            try {
+                if (object.typename !== Neko2D.OBJECT) {
+                    throw new TypeError(
+                        "From <Neko2D.Object.intersect>, object is not recognized by Neko2D."
+                    );
+                }
+                return SAT(this, object);
+            } catch (e) {
+                console.error(`${e.stack}\n`);
+            }
         }
 
         move = (dt = 0, dax = 0, day = 0) => {
