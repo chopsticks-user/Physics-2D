@@ -13,15 +13,15 @@ import { SAT } from "../collisions/SAT.mjs"
                     properties = new Neko2D.Properties();
                 }
                 if (shape.typename !== "NekoShape") {
-                    shape = new Neko2D.Circle();
-                    throw new Error("From <Neko2D.Object.constructor>, shape object is not recognized by Neko2D.");
+                    throw new TypeError("From <Neko2D.Object.constructor>, shape object is not recognized by Neko2D.");
                 }
                 if (properties.typename !== "NekoProperties") {
-                    properties = new Neko2D.Properties();
-                    throw new Error("From <Neko2D.Object.constructor>, shape object is not recognized by Neko2D.");
+                    throw new TypeError("From <Neko2D.Object.constructor>, shape object is not recognized by Neko2D.");
                 }
             } catch (e) {
                 console.error(`${e.stack}\n`);
+                shape = new Neko2D.Circle();
+                properties = new Neko2D.Properties();
             } finally {
                 this.shape = shape;
                 this.properties = properties;
@@ -44,6 +44,7 @@ import { SAT } from "../collisions/SAT.mjs"
             } catch (e) {
                 console.error(`${e.stack}\n`);
             }
+            return false;
         }
 
         move = (dt = 0, dax = 0, day = 0) => {

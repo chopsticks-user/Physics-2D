@@ -1,9 +1,20 @@
 import Neko2D from "../../../Neko2D.mjs"
+import { looselyV2 } from "../../../ultis/TypeChecks.mjs";
 
 export class Shape {
     constructor(type = "circle", center = { x: 0, y: 0 }) {
-        this.type = type;
-        this.center = center;
+        try {
+            const list = Shape.shapeList;
+            if (!list.find((shapeType) => shapeType === type)) {
+                type = "circle";
+                throw new Error(`Shape <${type}> not found.`);
+            }
+        } catch (e) {
+            console.error(`${e.stack}\n`);
+        } finally {
+            this.type = type;
+            this.center = new Neko2D.V2(center.x, center.y);
+        }
     }
 
     get typename() {
@@ -15,6 +26,7 @@ export class Shape {
     }
 
     distance = (...shapes) => {
+
         const len = shapes.length;
         const results = shapes.map((shape) => {
             const { x, y } = shape.type ? shape.center : shape;
