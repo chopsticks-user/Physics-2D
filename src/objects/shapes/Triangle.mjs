@@ -32,6 +32,10 @@ import { Shape } from "./Shape.mjs";
         get circumference() {
             return Math.PI * this.radius * 2;
         }
+
+        get collisionData() {
+            return {x: this.center.x, y: this.center.y, maxReach: this.maxReach};
+        }
     }
     return module;
 })(Neko2D || {});

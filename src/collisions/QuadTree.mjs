@@ -1,3 +1,4 @@
+import Neko2D from "../../Neko2D.mjs"
 import { QUADTREE_CAPACITY } from "../../Ultis/Ultis.module.js"
 
 export class QuadTree {
@@ -73,7 +74,8 @@ export class QuadTree {
         return true;
     }
 
-    insert = (x, y, maxReach) => {
+    insert = (object) => {
+        const {x, y, maxReach} = object.collisionData;
         if (this.contain(x, y, maxReach) === false) {
             return false;
         }

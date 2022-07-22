@@ -1,5 +1,4 @@
 import Neko2D from "../../Neko2D.mjs"
-import { SAT } from "../collisions/SAT.mjs"
 
 ((module) => {
     var module = module || {};
@@ -27,6 +26,10 @@ import { SAT } from "../collisions/SAT.mjs"
 
         get vertices() {
             return this.shape.vertices;
+        }
+
+        get collisionData() {
+            return this.shape.collisionData;
         }
 
         intersect = (object) => {

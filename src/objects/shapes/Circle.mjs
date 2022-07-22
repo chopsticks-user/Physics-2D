@@ -21,6 +21,10 @@ import { Shape } from "./Shape.mjs"
             return Math.PI * this.radius * 2;
         }
 
+        get collisionData() {
+            return {x: this.center.x, y: this.center.y, maxReach: this.maxReach};
+        }
+
         intersect = (rhs) => {
             if (!this.outOfRange(rhs)) {
                 return false;
