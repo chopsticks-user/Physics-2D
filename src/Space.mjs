@@ -68,21 +68,31 @@ import {
                 node.id = len;
                 this.partitions.insert(node);
             }
-
+            let count = 0;
             // query quadtree
             len = this.objects.length;
             while (len--) {
                 const node = this.objects[len].collisionData;
                 node.id = len;
+
                 // range from the outer of the object
                 const outterDistance = Math.max(
                     this.objects[len].properties.velocity.magnitude * SEARCH_RANGE_FACTOR, 1
                 );
-                const neightborNodes = this.partitions.query(node, outterDistance);
+                let neightborNodes = this.partitions.query(node, outterDistance);
+
+                // remove duplicates
+
+                // neightborNodes = neightborNodes.filter((value, index, self) => {
+                //     return self.indexOf(value) === index;
+                // })
+                neightborNodes = [...new Set(neightborNodes)];
+
+                // collision
                 let nLen = neightborNodes.length;
                 while (nLen--) {
                     if (this.objects[len].intersect(this.objects[neightborNodes[nLen].id])) {
-                        
+                        count++;
                         // console.log("collision detected");
                         // run collision handler
                         // update all objects' physics states
@@ -90,6 +100,7 @@ import {
                     };
                 }
             };
+            console.log(count);
         }
     }
     return module;

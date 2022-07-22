@@ -26,7 +26,7 @@ import { Shape } from "./Shape.mjs"
         }
 
         intersect = (rhs) => {
-            if (!this.outOfRange(rhs)) {
+            if (this.outOfRange(rhs)) {
                 return false;
             }
             if (rhs.type === "circle") {

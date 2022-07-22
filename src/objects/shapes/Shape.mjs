@@ -15,7 +15,7 @@ export class Shape {
     }
 
     outOfRange = (rhs) => {
-        return this.maxReach + rhs.maxReach >= this.distance(rhs);
+        return this.maxReach + rhs.maxReach < this.distance(rhs);
     }
 
     distance = (...args) => {

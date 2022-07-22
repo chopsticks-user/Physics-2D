@@ -95,16 +95,20 @@ export class QuadTree {
         if (!this.contain(node)) {
             return [];
         }
-        const result = this.#container.filter((value) => {
-            return (value.id !== node.id && outterDistance >= Math.sqrt((value.x - node.x) ** 2 + (value.y - node.y) ** 2) - node.maxReach - value.maxReach)
+        let result = this.#container.filter((value) => {
+            return (
+                value.id !== node.id && outterDistance >= Math.sqrt(
+                    (value.x - node.x) ** 2 + (value.y - node.y) ** 2
+                ) - node.maxReach - value.maxReach
+            )
         });
         if (!this.#children.NW) {
             return result;
         }
-        result.concat(this.#children.NW.query(node, outterDistance));
-        result.concat(this.#children.NE.query(node, outterDistance));
-        result.concat(this.#children.SW.query(node, outterDistance));
-        result.concat(this.#children.SE.query(node, outterDistance));
+        result = result.concat(this.#children.NW.query(node, outterDistance));
+        result = result.concat(this.#children.NE.query(node, outterDistance));
+        result = result.concat(this.#children.SW.query(node, outterDistance));
+        result = result.concat(this.#children.SE.query(node, outterDistance));
         return result;
     }
 }
