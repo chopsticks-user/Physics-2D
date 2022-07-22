@@ -22,5 +22,3 @@ import { timeStart } from "../ultis/Ultis.module.js"
     }
     return module;
 })(Neko2D || {});
-
-export default Neko2D;

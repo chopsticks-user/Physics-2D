@@ -13,5 +13,3 @@ import Neko2D from "../Neko2D.mjs"
     module.EULER = Math.E;
     return module;
 })(Neko2D || {});
-
-export default Neko2D;

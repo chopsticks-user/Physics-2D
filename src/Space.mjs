@@ -1,8 +1,6 @@
 import Neko2D from "../Neko2D.mjs"
 import { QuadTree } from "./collisions/QuadTree.mjs";
 import {
-    strictlyNumber,
-    looselyV2,
     SPACE_VIEW_MAX_WIDTH,
     SPACE_VIEW_MAX_HEIGHT,
     MAXIMUM_N_OBJECTS
@@ -14,8 +12,8 @@ import {
         static #idList = [];
         constructor(width = 0, height = 0) {
             this.dimension = {
-                width: Neko2D.min(width, SPACE_VIEW_MAX_WIDTH),
-                height: Neko2D.min(height, SPACE_VIEW_MAX_HEIGHT)
+                width: Math.min(width, SPACE_VIEW_MAX_WIDTH),
+                height: Math.min(height, SPACE_VIEW_MAX_HEIGHT)
             }
             this.view = {
                 x: 0, y: 0,
@@ -36,9 +34,9 @@ import {
                 }
             };
             this.partitions = new QuadTree(width, height);
-            this.time = new Neko2D.Time();
             this.physics = 0;
             this.objects = [];
+            this.time = new Neko2D.Time();
         }
 
         get typename() {
@@ -73,5 +71,3 @@ import {
     }
     return module;
 })(Neko2D || {});
-
-export default Neko2D;

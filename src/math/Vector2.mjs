@@ -46,6 +46,14 @@ import { strictlyNumber, looselyV2 } from "../../ultis/Ultis.module.js"
             return new module.V2(-this.x, -this.y);
         }
 
+        rotate = (angle) => {
+            const rotatedVector = new module.V2.fromProperties(
+                this.magnitude, this.direction + angle
+            );
+            this.x = rotatedVector.x;
+            this.y = rotatedVector.y;
+        }
+
         static fromPoints = (initialP, terminalP) => {
             // if (!looselyV2(initialP, terminalP)) {
             //     console.warn("From Neko2D.V2.fromProperties, invalid arguments.");

@@ -1,5 +1,5 @@
 import Neko2D from "../../Neko2D.mjs"
-import { looselyV2, strictlyNumber } from "../../ultis/Ultis.module.js"
+// import { looselyV2, strictlyNumber } from "../../ultis/Ultis.module.js"
 
 ((module) => {
     var module = module || {};
@@ -19,8 +19,17 @@ import { looselyV2, strictlyNumber } from "../../ultis/Ultis.module.js"
         get typename() {
             return Neko2D.PROPERTIES;
         }
+
+        get momentum() { }
+
+        get kineticEnergy() { }
+
+        get potentialEnergy() { }
+
+        get totalEnergy() { }
+
     }
     return module;
 })(Neko2D || {});
 
-export default Neko2D;
+// export default Neko2D;

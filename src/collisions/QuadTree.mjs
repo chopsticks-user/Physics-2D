@@ -1,4 +1,3 @@
-import Neko2D from "../../Neko2D.mjs"
 import { QUADTREE_CAPACITY } from "../../Ultis/Ultis.module.js"
 
 export class QuadTree {

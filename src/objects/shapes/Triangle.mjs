@@ -40,4 +40,4 @@ import { Shape } from "./Shape.mjs";
     return module;
 })(Neko2D || {});
 
-export default Neko2D;
+// export default Neko2D;

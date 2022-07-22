@@ -50,4 +50,4 @@ import { SAT } from "../../collisions/SAT.mjs"
     return module;
 })(Neko2D || {});
 
-export default Neko2D;
+// export default Neko2D;

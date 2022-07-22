@@ -1,6 +1,5 @@
 import Neko2D from "./Neko2D.module.js"
 import * as U from "./Ultis/Ultis.module.js"
-import { QuadTree } from "./src/collisions/QuadTree.mjs";
 
 const vv = [];
 
@@ -10,7 +9,7 @@ for (let i = 0; i < 10; i++) {
 
 const test = () => {
     let n = 1;
-    const nObjects = 5001;
+    const nObjects = 1001;
     const spaceSize = 1000000;
     const space = new Neko2D.Space(spaceSize, spaceSize);
     while (n--) {
