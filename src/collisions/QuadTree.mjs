@@ -49,47 +49,46 @@ export class QuadTree {
 
         let len = this.#container.length;
         while (len--) {
-            this.#children.NW.insert(value.x, value.y, value.maxReach);
-            this.#children.NE.insert(value.x, value.y, value.maxReach);
-            this.#children.SW.insert(value.x, value.y, value.maxReach);
-            this.#children.SE.insert(value.x, value.y, value.maxReach);
+            this.#children.NW.insert(this.#container[len]);
+            this.#children.NE.insert(this.#container[len]);
+            this.#children.SW.insert(this.#container[len]);
+            this.#children.SE.insert(this.#container[len]);
         };
 
         this.#container = [];
     }
 
-    contain = (x, y, maxReach) => {
-        if (y - maxReach > this.#boundary.topLeft.y) {
+    contain = (node) => {
+        if (node.y - node.maxReach > this.#boundary.topLeft.y) {
             return false;
         }
-        if (y + maxReach < this.#boundary.bottomRight.y) {
+        if (node.y + node.maxReach < this.#boundary.bottomRight.y) {
             return false;
         }
-        if (x - maxReach > this.#boundary.bottomRight.x) {
+        if (node.x - node.maxReach > this.#boundary.bottomRight.x) {
             return false;
         }
-        if (x + maxReach < this.#boundary.topLeft.x) {
+        if (node.x + node.maxReach < this.#boundary.topLeft.x) {
             return false;
         }
         return true;
     }
 
-    insert = (object) => {
-        const {x, y, maxReach} = object.collisionData;
-        if (this.contain(x, y, maxReach) === false) {
+    insert = (node) => {
+        if (this.contain(node) === false) {
             return false;
         }
         if (this.#children.NW === null) {
             if (this.#container.length < QUADTREE_CAPACITY) {
-                this.#container.push({ x: x, y: y, maxReach: maxReach });
+                this.#container.push(node);
                 return true;
             }
             this.#subdivide();
         }
-        this.#children.NW.insert(x, y, maxReach);
-        this.#children.NE.insert(x, y, maxReach);
-        this.#children.SW.insert(x, y, maxReach);
-        this.#children.SE.insert(x, y, maxReach);
+        this.#children.NW.insert(node);
+        this.#children.NE.insert(node);
+        this.#children.SW.insert(node);
+        this.#children.SE.insert(node);
         return false;
     }
 

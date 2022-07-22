@@ -29,5 +29,6 @@ export {
 export {
     QUADTREE_CAPACITY,
     SPACE_VIEW_MAX_WIDTH,
-    SPACE_VIEW_MAX_HEIGHT
+    SPACE_VIEW_MAX_HEIGHT,
+    MAXIMUM_N_OBJECTS
 } from "./Constants.mjs"

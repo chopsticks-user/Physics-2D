@@ -15,8 +15,9 @@ import Neko2D from "../../Neko2D.mjs"
                 shape = new Neko2D.Circle();
                 properties = new Neko2D.Properties();
             }
-            this.shape = shape;
             this.properties = properties;
+            this.shape = shape;
+            this.shape.center = properties.position;
             this.time = new Neko2D.Time();
         };
 
@@ -40,7 +41,8 @@ import Neko2D from "../../Neko2D.mjs"
         }
 
         move = (dt = 0, dax = 0, day = 0) => {
-
+            //
+            this.shape.center = this.properties.position;
         }
     }
     return module;

@@ -9,14 +9,23 @@ for (let i = 0; i < 10; i++) {
 }
 
 const test = () => {
-    let n = 100000;
+    let n = 1;
+    const nObjects = 5001;
+    const spaceSize = 1000000;
+    const space = new Neko2D.Space(spaceSize, spaceSize);
     while (n--) {
-        const qt = new QuadTree(100000, 100000);
-        const u = new Neko2D.Circle(Math.random() * 10000, {x: Math.random() * 10000, y: Math.random() * 10000});
-        const v = new Neko2D.Circle(Math.random() * 10000, {x: Math.random() * 10000, y: Math.random() * 10000});
-        const t = new Neko2D.Circle(Math.random() * 10000, {x: Math.random() * 10000, y: Math.random() * 10000});
-        const p = new Neko2D.Properties();
-        const o = new Neko2D.Object(u, p);
+        for (let i = 0; i < nObjects; i++) {
+            space.insert(
+                new Neko2D.Object(
+                    new Neko2D.Circle(Math.random() * 10 + 1),
+                    new Neko2D.Properties({ 
+                        position: { x: Math.random() * 100000 + 1, y: Math.random() * 100000 + 1 } 
+                    })
+                )
+            );
+        }
+        space.update();
+        space.clear();
     }
 }
 
