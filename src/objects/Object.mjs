@@ -15,24 +15,15 @@ import Neko2D from "../../Neko2D.mjs"
                 shape = new Neko2D.Circle();
                 properties = new Neko2D.Properties();
             }
-            // Basic
             this.properties = properties;
             this.shape = shape;
             this.shape.center = properties.position;
-            this.rotation = {
-                angle: 0,
-                vector: new Neko2D.V2(1, 0)
-            }
-
-            // Physics
             this.forces = [];
             this.fields = [];
-
-            // Visual
+            this.attachedBy = [];
             this.tangible = true;
             this.pinned = false;
             this.attached = false;
-
             this.time = new Neko2D.Time();
         };
 
@@ -41,8 +32,8 @@ import Neko2D from "../../Neko2D.mjs"
         }
 
         get vertices() {
-            // according to rotational angle
             return this.shape.vertices;
+            // according to rotational angle
         }
 
         get collisionData() {
@@ -50,8 +41,8 @@ import Neko2D from "../../Neko2D.mjs"
         }
 
         rotate = (angle) => {
-            this.rotation.angle += angle;
-            this.rotation.vector.rotate(angle);
+            this.properties.rotation.angle += angle;
+            this.properties.rotation.vector.rotate(angle);
         }
 
         intersect = (object) => {
@@ -61,7 +52,7 @@ import Neko2D from "../../Neko2D.mjs"
             return this.shape.intersect(object.shape);
         }
 
-        move = (dt = 0, dax = 0, day = 0) => {
+        translate = (dt = 0, dax = 0, day = 0) => {
             // 
             if (this.shape.type === "circle") {
                 // rotate

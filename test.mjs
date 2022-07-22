@@ -9,16 +9,32 @@ for (let i = 0; i < 10; i++) {
 
 const test = () => {
     let n = 1;
-    const nObjects = 1001;
+    const nObjects = 1;
     const spaceSize = 1000000;
     const space = new Neko2D.Space(spaceSize, spaceSize);
     while (n--) {
         for (let i = 0; i < nObjects; i++) {
+            // space.insert(
+            //     new Neko2D.Object(
+            //         new Neko2D.Circle(Math.random() * 10 + 1),
+            //         new Neko2D.Properties({ 
+            //             position: { x: Math.random() * 100000 + 1, y: Math.random() * 100000 + 1 } 
+            //         })
+            //     )
+            // );
             space.insert(
                 new Neko2D.Object(
-                    new Neko2D.Circle(Math.random() * 10 + 1),
+                    new Neko2D.Circle(2),
                     new Neko2D.Properties({ 
-                        position: { x: Math.random() * 100000 + 1, y: Math.random() * 100000 + 1 } 
+                        position: { x: 3, y: 3 } 
+                    })
+                )
+            );
+            space.insert(
+                new Neko2D.Object(
+                    new Neko2D.Circle(2),
+                    new Neko2D.Properties({ 
+                        position: { x: 0, y: 0 } 
                     })
                 )
             );
@@ -29,4 +45,8 @@ const test = () => {
 }
 
 U.funcExeTime("Test QuadTree + Space", test);
+
+const a = [1, 2];
+const b = [2, 4];
+console.log(a.concat(b));
 

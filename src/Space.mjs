@@ -3,7 +3,8 @@ import { QuadTree } from "./collisions/QuadTree.mjs";
 import {
     SPACE_VIEW_MAX_WIDTH,
     SPACE_VIEW_MAX_HEIGHT,
-    MAXIMUM_N_OBJECTS
+    MAXIMUM_N_OBJECTS,
+    SEARCH_RANGE_FACTOR
 } from "../ultis/Ultis.module.js"
 
 ((module) => {
@@ -62,11 +63,33 @@ import {
         update = () => {
             this.partitions = new QuadTree(this.dimension.width, this.dimension.height);
             let len = this.objects.length;
-            while(len--) {
-                this.partitions.insert(this.objects[len].collisionData);
+            while (len--) {
+                const node = this.objects[len].collisionData;
+                node.id = len;
+                this.partitions.insert(node);
             }
 
-            //handle collisions and calculations
+            // query quadtree
+            len = this.objects.length;
+            while (len--) {
+                const node = this.objects[len].collisionData;
+                node.id = len;
+                // range from the outer of the object
+                const outterDistance = Math.max(
+                    this.objects[len].properties.velocity.magnitude * SEARCH_RANGE_FACTOR, 1
+                );
+                const neightborNodes = this.partitions.query(node, outterDistance);
+                let nLen = neightborNodes.length;
+                while (nLen--) {
+                    if (this.objects[len].intersect(this.objects[neightborNodes[nLen].id])) {
+                        
+                        // console.log("collision detected");
+                        // run collision handler
+                        // update all objects' physics states
+
+                    };
+                }
+            };
         }
     }
     return module;
