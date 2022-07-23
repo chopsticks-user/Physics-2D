@@ -1,13 +1,14 @@
-import Neko2D from "../../../Neko2D.mjs"
+import { SHAPE } from "../../Constants.mjs"
+import { V2 } from "../../math/Vector2.mjs"
 
 export class Shape {
     constructor(type = "circle", center = { x: 0, y: 0 }) {
         this.type = type;
-        this.center = new Neko2D.V2(center.x, center.y);
+        this.center = new V2(center.x, center.y);
     }
 
     get typename() {
-        return Neko2D.SHAPE;
+        return SHAPE;
     }
 
     static get shapeList() {
@@ -25,7 +26,7 @@ export class Shape {
             return;
         }
         const results = args.map((arg) => {
-            if (arg.typename === Neko2D.SHAPE) {
+            if (arg.typename === SHAPE) {
                 return Math.sqrt(
                     (this.center.x - arg.center.x) ** 2 + (this.center.y - arg.center.y) ** 2
                 );

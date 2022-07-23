@@ -1,4 +1,4 @@
-import Neko2D from "./Neko2D.module.js"
+import * as Neko2D from "./Neko2D.module.js"
 import * as U from "./Ultis/Ultis.module.js"
 
 // new Neko2D.Object(
@@ -18,13 +18,13 @@ const createObject = (radius, x, y) => {
 }
 
 const test = () => {
-    let n = 60;
-    const nObjects = 10;
-    const spaceSize = 20;
+    let n = 1;
+    const nObjects = 1000;
+    const spaceSize = 20000;
     const space = new Neko2D.Space(spaceSize, spaceSize);
     while (n--) {
         for (let i = 0; i < nObjects; i++) {
-            space.insert(createObject(1, Math.random() * 10, Math.random() * 10));
+            space.insert(createObject(10, Math.random() * 20000 - 10000, Math.random() * 20000 - 10000));
         }
         space.update();
         space.clear();
@@ -32,8 +32,4 @@ const test = () => {
 }
 
 U.funcExeTime("Test QuadTree + Space", test);
-
-const a = [1, 2];
-const b = [2, 4];
-console.log(a.concat(b));
 

@@ -1,15 +1,9 @@
-import Neko2D from "../Neko2D.mjs"
+export const VECTOR2 = "NekoV2";
+export const SHAPE = "NekoShape";
+export const PROPERTIES = "NekoProperties";
+export const OBJECT = "NekoObject";
+export const SPACE = "NekoSpace";
+export const TIME = "NekoTime";
 
-((module) => {
-    var module = module || {};
-    module.VECTOR2 = "NekoV2";
-    module.SHAPE = "NekoShape";
-    module.PROPERTIES = "NekoProperties";
-    module.OBJECT = "NekoObject";
-    module.SPACE = "NekoSpace";
-    module.TIME = "NekoTime";
-
-    module.PI = Math.PI;
-    module.EULER = Math.E;
-    return module;
-})(Neko2D || {});
+export const PI = Math.PI;
+export const EULER = Math.E;
